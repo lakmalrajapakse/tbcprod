@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Shift Break Control - TBC</label>
+    <protected>false</protected>
+    <values>
+        <field>sirenum__Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>sirenum__Configuration__c</field>
+        <value xsi:type="xsd:string">{
+&quot;fallbackShiftBreakSource&quot;: &quot;Break Definitions&quot;,
+&quot;timing&quot;: {
+&quot;defaultFields&quot;: {
+&quot;startField&quot;: &quot;sirenum__Billable_Calculated_Start_Time__c&quot;,
+&quot;endField&quot;: &quot;sirenum__Billable_Calculated_End_Time__c&quot;
+}
+},
+&quot;matching&quot;: [
+{
+&quot;definitionField&quot;: &quot;sirenum__Weekday__c&quot;,
+&quot;shiftField&quot;: &quot;sirenum__Weekday__c&quot;
+},
+{
+&quot;definitionField&quot;: &quot;sirenum__Site__c&quot;,
+&quot;shiftField&quot;: &quot;sirenum__Site__c&quot;
+},
+{
+&quot;definitionField&quot;: &quot;WFM_Contract__c&quot;,
+&quot;shiftField&quot;: &quot;sirenum__Contract__c&quot;
+},
+{
+&quot;definitionField&quot;: &quot;sirenum__Team__c&quot;,
+&quot;shiftField&quot;: &quot;sirenum__Team__c&quot;
+}
+]
+}</value>
+    </values>
+    <values>
+        <field>sirenum__Schema__c</field>
+        <value xsi:type="xsd:string">https://sirenum.com/schema/2022/01/shift-break-control.json</value>
+    </values>
+</CustomMetadata>

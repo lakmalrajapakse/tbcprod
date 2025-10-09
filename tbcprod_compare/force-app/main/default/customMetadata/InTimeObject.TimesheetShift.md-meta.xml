@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Timesheet-Shift</label>
+    <protected>false</protected>
+    <values>
+        <field>BatchSize__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>HandlerName__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Object__c</field>
+        <value xsi:type="xsd:string">sirenum__Timesheet_Line__c</value>
+    </values>
+    <values>
+        <field>Order__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>RelationshipName__c</field>
+        <value xsi:type="xsd:string">sirenum__Timesheet_Lines__r</value>
+    </values>
+    <values>
+        <field>SendContentDocument__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>Source__c</field>
+        <value xsi:type="xsd:string">Salesforce</value>
+    </values>
+    <values>
+        <field>Type__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>WebserviceReference__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

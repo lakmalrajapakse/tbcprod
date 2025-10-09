@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Shift Approval Manager (Default)</label>
+    <protected>false</protected>
+    <values>
+        <field>Actual_End_Time__c</field>
+        <value xsi:type="xsd:string">Actual End Time</value>
+    </values>
+    <values>
+        <field>Actual_Start_Date__c</field>
+        <value xsi:type="xsd:string">Actual Start Date</value>
+    </values>
+    <values>
+        <field>Actual_Start_Time__c</field>
+        <value xsi:type="xsd:string">Actual Start Time</value>
+    </values>
+    <values>
+        <field>Billable_End_Time__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Billable_Hours__c</field>
+        <value xsi:type="xsd:string">Approved Hours</value>
+    </values>
+    <values>
+        <field>Billable_Start_Date__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Billable_Start_Time__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Date_Format__c</field>
+        <value xsi:type="xsd:string">dd/MM/yyyy</value>
+    </values>
+    <values>
+        <field>Is_Approved__c</field>
+        <value xsi:type="xsd:string">Approved</value>
+    </values>
+    <values>
+        <field>Job_Role_Id__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Job_Role__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>PO_Number__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Payroll_ID__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>RecordID__c</field>
+        <value xsi:type="xsd:string">Shift ID</value>
+    </values>
+    <values>
+        <field>Shift_Date__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Site_Id__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Site__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

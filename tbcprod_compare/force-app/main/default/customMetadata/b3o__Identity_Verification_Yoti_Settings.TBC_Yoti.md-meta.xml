@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>TBC_Yoti</label>
+    <protected>false</protected>
+    <values>
+        <field>b3o__Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>b3o__Allow_Handoff__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>b3o__Allowed_Capture_Methods__c</field>
+        <value xsi:type="xsd:string">CAMERA_AND_UPLOAD</value>
+    </values>
+    <values>
+        <field>b3o__Application_Endpoint__c</field>
+        <value xsi:type="xsd:string">https://api.yoti.com/idverify/v1/</value>
+    </values>
+    <values>
+        <field>b3o__Client_SDK_ID_Key__c</field>
+        <value xsi:type="xsd:string">5b667d40-9dc7-49ab-b324-9a9d6f690c74</value>
+    </values>
+    <values>
+        <field>b3o__Client_Side_User_View_URL__c</field>
+        <value xsi:type="xsd:string">https://api.yoti.com/idverify/v1/web/index.html?sessionID={0}&amp;sessionToken={1}</value>
+    </values>
+    <values>
+        <field>b3o__Error_Callback_URL__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>b3o__Font_Color__c</field>
+        <value xsi:type="xsd:string">#CE0058</value>
+    </values>
+    <values>
+        <field>b3o__Locale__c</field>
+        <value xsi:type="xsd:string">en-GB</value>
+    </values>
+    <values>
+        <field>b3o__Order__c</field>
+        <value xsi:type="xsd:double">1.0</value>
+    </values>
+    <values>
+        <field>b3o__Preset_Issuing_Country__c</field>
+        <value xsi:type="xsd:string">GBR</value>
+    </values>
+    <values>
+        <field>b3o__Primary_Color__c</field>
+        <value xsi:type="xsd:string">#CE0058</value>
+    </values>
+    <values>
+        <field>b3o__Privacy_Policy_URL__c</field>
+        <value xsi:type="xsd:string">https://www.google.com/</value>
+    </values>
+    <values>
+        <field>b3o__Private_Key__c</field>
+        <value xsi:type="xsd:string">MIIEowIBAAKCAQEAzkiDSQhInQxWqE7qapfL0U7jEnJpBeMecbYbGspgQMBkNIc5
+hUniekaNWD+B5d05qqpgicW9oNhdCTgfRI3sK11mB8rLM1pxPRfNYOdDNJQf3tjQ
+QSMBvbGM9t2fBj2u3YyU5f3x+uAKvdYS2mwBrMzhit73wNiLjXgUwt7wWor2NsyC
+c2ZFGH78SptBPGHiboEU8UctjnQJXikq/pWEWBtm7vZbG/6zI52fqJDX5D6kIcMi
+wjwHmr0gpuh/zXOshZ+ujEzn9KV/2N3MmkD+GVTPerpOxCOJgMFN61fWMDD03ABT
+OIiU9Jp/W4aJKuc2XcLVbbZ5wcTQMYfLBlhYeQIDAQABAoIBAEJVchZBmiwaZCFy
+YxJM5udTUVTEwr34Z3lUgInQazxXQcHcfCQ++pusZVZr8acLyTf22t1i35RCD0Tg
+LbnbU4csXRuDXG2Sl1h4d3xCUcuuGEOOgAV6LtyjpDtcT/9vRXSL+POugipU8k9S
+cDSZx74cEikYgx4Z5GJlK3PwweSzOCQvn84UCJMtTsI9nZ0m2bJr8+XZMFSqDwwj
+ZKiZtbnnd0d1ks6TGwo9bcgy4DvOuKrrgVyuTpZ+HUu+wK3WKvHZ+A3zKIYEp6Cc
+ZgpJ+3PcV9wXzQ1IzTtOajwl20NT5KzegMh6ck+H9TrogAlKIcZWjU2cCwmOKmHU
+H2Ml8GMCgYEA6Lf07TdQ+YnFoyzVTMidtF3aDrssSnVvOGoHdOdYFZ2ZnatlBO1O
+Bg24M5V1pZv0w79uJYk8krHU78/shmsDONhYu12SKwwBJ+DVxKFLg8yhc9P7E/lv
+I0z6cNa7ILE3cyeBCaaYh16SjmaXLdrf9aJze/QZYau6tbwh+Lcfm5cCgYEA4uuI
+nnbZHXrdTh3DPFM0qRQKLGMMninCXhLN9rDNfY2T2mq9HmAhjFaLgDtOWx6hMsD4
+Wxn3IFqzgpl1Cr33L+yzHhBT+juQXAK+u2Sjm4ZMxtpPiGBIgxZg3I0kt9zMks4u
+QaTloIoOd5/Qw6F8k9tIsnVv0zis3ewT3difbm8CgYAWRJv0IunlptA5h+21FjE4
+9A4MgM6BJXGKBWNHRWfBUb5EPwVAjnB71c49aVzDhwPJw0SH5PTd2JRWih/I0O6S
+/uimrRJyegiWR0ZNNV3jc64zRiJtS93dk90W9QUc4Lg8lZgcU0ufEGaXp6tpoNrz
+RyMjxjyzgtovz5u0j9k/awKBgQCGJYV7YHkTs2mW34Nmay3rclxdRyTTb45m/Kjj
+2DtyqLqqWYV5qozKoPMRGH5G4cGb9nYbrSrp5pTOdRe7BPhXTY/KCw8KFCJQMpM8
+xs7thyRmPfLchUb4r8cNOydkxlPtyZOQ3QGeuV66GzFYJWQ3KGA+l6xG6u9Otlw8
+Pu5pYwKBgAw38vTSpaEjNPUTPnOoDjFH06Ybnx6vMgMXpBs6pyPwmZ4BF8z+klo1
+IEbWjOsq6mrufp5ZxF6rdspL3yKnTG9apWuXSOvaBjQ8i0+NFKAlWCstbLyWd/Kh
+A+JqPnH2pPbo0XYCErmZGMahR7Sz94nl+kEtqx+NeaBfYXtpXizr</value>
+    </values>
+    <values>
+        <field>b3o__Requested_Checks__c</field>
+        <value xsi:type="xsd:string">[{&quot;type&quot;: &quot;ID_DOCUMENT_AUTHENTICITY&quot;,&quot;config&quot;: {&quot;manual_check&quot;: &quot;FALLBACK&quot;}},
+{&quot;type&quot;: &quot;LIVENESS&quot;,&quot;config&quot;: {&quot;liveness_type&quot;: &quot;ZOOM&quot;,&quot;max_retries&quot;: 1}},
+{&quot;type&quot;: &quot;ID_DOCUMENT_FACE_MATCH&quot;,&quot;config&quot;: {&quot;manual_check&quot;: &quot;FALLBACK&quot;}}]</value>
+    </values>
+    <values>
+        <field>b3o__Requested_Tasks__c</field>
+        <value xsi:type="xsd:string">[{&quot;type&quot;: &quot;ID_DOCUMENT_TEXT_DATA_EXTRACTION&quot;,&quot;config&quot;: {&quot;manual_check&quot;: &quot;FALLBACK&quot;,&quot;chip_data&quot;: &quot;DESIRED&quot;}}]</value>
+    </values>
+    <values>
+        <field>b3o__Results_Callback__c</field>
+        <value xsi:type="xsd:string">https://thebestconnectionsf.my.salesforce-sites.com/onboarding/services/apexrest/b3y/IV_Yoti_Client/v1/results</value>
+    </values>
+    <values>
+        <field>b3o__Secondary_Color__c</field>
+        <value xsi:type="xsd:string">#CCCCCC</value>
+    </values>
+    <values>
+        <field>b3o__Success_Callback_URL__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Set_Holiday_Pay_All_Hours</name>
+        <label>Set Holiday Pay All Hours</label>
+        <locationX>50</locationX>
+        <locationY>503</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Holiday_Pay_All_Hours__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>holidayPayAllHours</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>SetTimesheetFields</name>
+        <label>Set Timesheet Fields</label>
+        <locationX>182</locationX>
+        <locationY>287</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Submitted</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Check_if_Holiday_Pay_All_Hours</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>Check_if_Holiday_Pay_All_Hours</name>
+        <label>Check if Holiday Pay All Hours</label>
+        <locationX>182</locationX>
+        <locationY>395</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Not_Set</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Holiday_Pay_All_Hours__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Holiday_Pay_All_Hours</targetReference>
+            </connector>
+            <label>Not Set</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>holidayPayAllHours</name>
+        <dataType>Number</dataType>
+        <expression>IF({!$Record.sirenum__Client__r.Holiday_Pay_All_Hours__c}, 1, 0)</expression>
+        <scale>2</scale>
+    </formulas>
+    <interviewLabel>1218 Timesheet. Before Insert Automation {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>1218 Timesheet. Before Insert Automation</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>SetTimesheetFields</targetReference>
+        </connector>
+        <object>sirenum__Timesheet__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

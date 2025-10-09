@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Job Global Delete</label>
+    <protected>false</protected>
+    <values>
+        <field>VRT__ATS_Job_Status_Field_API__c</field>
+        <value xsi:type="xsd:string">TR1__Status__c</value>
+    </values>
+    <values>
+        <field>VRT__ATS_Job_Status_Field_Values__c</field>
+        <value xsi:type="xsd:string">Closed</value>
+    </values>
+    <values>
+        <field>VRT__Delete_When_Controlling_Field_Value_Is__c</field>
+        <value xsi:type="xsd:string">DeleteWhenClosed</value>
+    </values>
+    <values>
+        <field>VRT__Is_Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>VRT__Reference_Field__c</field>
+        <value xsi:type="xsd:string">TR1__Job_Number__c</value>
+    </values>
+    <values>
+        <field>VRT__Required_Field_Missing_Error__c</field>
+        <value xsi:type="xsd:string">Required field (Job Status, Advert Deletion) is missing.</value>
+    </values>
+    <values>
+        <field>VRT__Salesforce_Object_API__c</field>
+        <value xsi:type="xsd:string">TR1__Job__c</value>
+    </values>
+    <values>
+        <field>VRT__Veritone_Controlling_Field__c</field>
+        <value xsi:type="xsd:string">Advert_Deletion__c</value>
+    </values>
+</CustomMetadata>

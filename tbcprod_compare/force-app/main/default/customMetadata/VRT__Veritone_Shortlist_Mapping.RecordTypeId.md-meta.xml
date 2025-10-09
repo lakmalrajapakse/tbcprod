@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>RecordTypeId</label>
+    <protected>false</protected>
+    <values>
+        <field>VRT__Default_Value__c</field>
+        <value xsi:type="xsd:string">012QH000000kdo9YAA</value>
+    </values>
+    <values>
+        <field>VRT__Description__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>VRT__Incoming_Example_Data__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>VRT__Is_Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>VRT__Salesforce_API_Field__c</field>
+        <value xsi:type="xsd:string">RecordTypeId</value>
+    </values>
+    <values>
+        <field>VRT__Salesforce_Object_API__c</field>
+        <value xsi:type="xsd:string">TR1__Application_V2__c</value>
+    </values>
+    <values>
+        <field>VRT__Veritone_API_Field__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

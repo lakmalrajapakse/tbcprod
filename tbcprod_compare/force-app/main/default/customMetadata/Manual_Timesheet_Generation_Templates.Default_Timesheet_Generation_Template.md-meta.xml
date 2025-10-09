@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Default Timesheet Generation Template</label>
+    <protected>false</protected>
+    <values>
+        <field>Charge_Rate__c</field>
+        <value xsi:type="xsd:string">Charge Rate</value>
+    </values>
+    <values>
+        <field>Hours__c</field>
+        <value xsi:type="xsd:string">Hours</value>
+    </values>
+    <values>
+        <field>Pay_Rate__c</field>
+        <value xsi:type="xsd:string">Pay Rate</value>
+    </values>
+    <values>
+        <field>Rate_Type__c</field>
+        <value xsi:type="xsd:string">Rate Type</value>
+    </values>
+    <values>
+        <field>Shift_Id__c</field>
+        <value xsi:type="xsd:string">Shift ID</value>
+    </values>
+    <values>
+        <field>Timesheet_Map__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;timesheet&quot;: {
+      &quot;splitByFields&quot;: [&quot;Placement__c&quot;, &quot;sirenum__PO_Number__c&quot;, &quot;sirenum__Site__c&quot;],
+      &quot;fieldMap&quot;: [{&quot;source&quot;: &quot;shift&quot;, &quot;srcFieldName&quot;: &quot;sirenum__Placement__c&quot;, &quot;targetFieldName&quot;: &quot;Placement__c&quot; , &quot;type&quot;: &quot;STRING&quot;},
+	          {&quot;source&quot;: &quot;shift&quot;, &quot;srcFieldName&quot;: &quot;sirenum__Client_ID__c&quot;, &quot;targetFieldName&quot;: &quot;sirenum__Client__c&quot; , &quot;type&quot;: &quot;STRING&quot;},
+			  {&quot;source&quot;: &quot;shift&quot;, &quot;srcFieldName&quot;: &quot;sirenum__Contract__c&quot;, &quot;targetFieldName&quot;: &quot;sirenum__Contract__c&quot;, &quot;type&quot;: &quot;STRING&quot;},
+			  {&quot;source&quot;: &quot;shift&quot;, &quot;srcFieldName&quot;: &quot;PO_Number__c&quot;, &quot;targetFieldName&quot;: &quot;sirenum__PO_Number__c&quot;, &quot;type&quot;: &quot;STRING&quot;},
+			  {&quot;source&quot;: &quot;shift&quot;, &quot;srcFieldName&quot;: &quot;sirenum__Site__c&quot;, &quot;targetFieldName&quot;: &quot;sirenum__Site__c&quot;, &quot;type&quot;: &quot;STRING&quot;},
+			  {&quot;source&quot;: &quot;shift&quot;, &quot;srcFieldName&quot;: &quot;sirenum__Team__c&quot;, &quot;targetFieldName&quot;: &quot;sirenum__Team__c&quot;, &quot;type&quot;: &quot;STRING&quot;},
+			  {&quot;source&quot;: &quot;shift&quot;, &quot;srcFieldName&quot;: &quot;sirenum__Contact__c&quot;, &quot;targetFieldName&quot;: &quot;sirenum__Worker__c&quot;, &quot;type&quot;: &quot;STRING&quot;}]
+  },
+  &quot;timesheetLine&quot;: {
+      &quot;fieldMap&quot;: [{&quot;source&quot;: &quot;file&quot;, &quot;srcFieldName&quot;: &quot;inTime_Pay_Element__c&quot;, &quot;targetFieldName&quot;: &quot;IntimePayElement__c&quot;, &quot;type&quot;: &quot;PICKLIST&quot;},
+	          {&quot;source&quot;: &quot;file&quot;, &quot;srcFieldName&quot;: &quot;Hours__c&quot;, &quot;targetFieldName&quot;: &quot;sirenum__Hours__c&quot;, &quot;type&quot;: &quot;DECIMAL&quot;},
+			  {&quot;source&quot;: &quot;file&quot;, &quot;srcFieldName&quot;: &quot;Pay_Rate__c&quot;, &quot;targetFieldName&quot;: &quot;sirenum__Rate__c&quot;, &quot;type&quot;: &quot;DECIMAL&quot;},
+			  {&quot;source&quot;: &quot;file&quot;, &quot;srcFieldName&quot;: &quot;Charge_Rate__c&quot;, &quot;targetFieldName&quot;: &quot;sirenum__Charge__c&quot;, &quot;type&quot;: &quot;DECIMAL&quot;},
+			  {&quot;source&quot;: &quot;file&quot;, &quot;srcFieldName&quot;: &quot;Rate_Type__c&quot;, &quot;targetFieldName&quot;: &quot;sirenum__RateType__c&quot;, &quot;type&quot;: &quot;MAP&quot;, &quot;valueMap&quot;: [{&quot;srcValue&quot;: &quot;Normal&quot;, &quot;tgtValue&quot;: &quot;Hourly&quot;}, {&quot;srcValue&quot;: &quot;Overtime&quot;, &quot;tgtValue&quot;: &quot;Overtime&quot;}]},
+			  {&quot;source&quot;: &quot;shift&quot;, &quot;srcFieldName&quot;: &quot;sirenum__Scheduled_Local_Start_Date__c&quot;, &quot;targetFieldName&quot;: &quot;sirenum__Date__c&quot;,&quot;type&quot;: &quot;DATE&quot;}]  
+  }  
+}</value>
+    </values>
+    <values>
+        <field>inTime_Pay_Element__c</field>
+        <value xsi:type="xsd:string">inTime Pay Element</value>
+    </values>
+</CustomMetadata>

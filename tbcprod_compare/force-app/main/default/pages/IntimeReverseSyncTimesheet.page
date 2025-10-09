@@ -1,0 +1,2 @@
+<apex:page standardController="sirenum__Timesheet__c" recordSetVar="timesheets" extensions="IntimeReverseSyncController" action="{!returnToListViewPage}" lightningStylesheets="true" docType="html-5.0">
+</apex:page>

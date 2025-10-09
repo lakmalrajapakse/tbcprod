@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Job</label>
+    <protected>false</protected>
+    <values>
+        <field>VRT__Advert_Deletion_Control_Field_Name__c</field>
+        <value xsi:type="xsd:string">Advert_Deletion__c</value>
+    </values>
+    <values>
+        <field>VRT__Advert_Visability_Control_Field_Name__c</field>
+        <value xsi:type="xsd:string">Advert_Visability__c</value>
+    </values>
+    <values>
+        <field>VRT__Contact_Owner_Field__c</field>
+        <value xsi:type="xsd:string">OwnerId</value>
+    </values>
+    <values>
+        <field>VRT__Object_Name__c</field>
+        <value xsi:type="xsd:string">TR1__Job__c</value>
+    </values>
+    <values>
+        <field>VRT__Posting_Field__c</field>
+        <value xsi:type="xsd:string">Job_Posted__c</value>
+    </values>
+    <values>
+        <field>VRT__Process_Coverletter__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>VRT__Reference_Field__c</field>
+        <value xsi:type="xsd:string">TR1__Job_Number__c</value>
+    </values>
+    <values>
+        <field>VRT__Valid_Coverletter_Identifier__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>VRT__Valid_Resume_Identifier__c</field>
+        <value xsi:type="xsd:string">cv</value>
+    </values>
+</CustomMetadata>

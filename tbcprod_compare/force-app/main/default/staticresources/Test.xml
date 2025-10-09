@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <ns:getTimesheetByIdResponse xmlns:ns="http://v3_12.webservices.intime.ipfour.com/xsd">
+            <ns:return xmlns:ax283="http://webservices.intime.ipfour.com/xsd" xmlns:ax285="http://util.java/xsd" xsi:type="ns:Timesheet" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <ns:accruedHoliday>10.68</ns:accruedHoliday>
+                <ns:adjustmentReason xsi:nil="true"/>
+                <ns:adjustmentReasonCode xsi:nil="true"/>
+                <ns:adjustsRefCode xsi:nil="true"/>
+                <ns:apprenticeshipLevy>0</ns:apprenticeshipLevy>
+                <ns:approved>2025-08-14T14:12:50.000+01:00</ns:approved>
+                <ns:approverId xsi:nil="true"/>
+                <ns:billOnHold>false</ns:billOnHold>
+                <ns:billOnHoldReason xsi:nil="true"/>
+                <ns:billOnHoldReasonCode xsi:nil="true"/>
+                <ns:clientId>44336</ns:clientId>
+                <ns:comment></ns:comment>
+                <ns:created>2025-08-14T14:12:50.000+01:00</ns:created>
+                <ns:creationMethod>5</ns:creationMethod>
+                <ns:customText1>DOIND1</ns:customText1>
+                <ns:customText2>202619</ns:customText2>
+                <ns:customText3>202619</ns:customText3>
+                <ns:customText4>20250812-4861</ns:customText4>
+                <ns:customText5>Sunday</ns:customText5>
+                <ns:customText6 xsi:nil="true"/>
+                <ns:durationInMillis>26100000</ns:durationInMillis>
+                <ns:erni>9.63</ns:erni>
+                <ns:estimatedEmployerCost>true</ns:estimatedEmployerCost>
+                <ns:exchangeForPurchase>1</ns:exchangeForPurchase>
+                <ns:exchangeForSale>1</ns:exchangeForSale>
+                <ns:exported>2025-08-14T14:35:25.000+01:00</ns:exported>
+                <ns:financials xsi:type="ns:Financials">
+                    <ns:purchaseBranch>NEUV01</ns:purchaseBranch>
+                    <ns:purchaseCostCentre xsi:nil="true"/>
+                    <ns:purchaseDepartment xsi:nil="true"/>
+                    <ns:purchaseDivision xsi:nil="true"/>
+                    <ns:purchaseLocation xsi:nil="true"/>
+                    <ns:purchaseProject xsi:nil="true"/>
+                    <ns:purchaseSector>NDLN01</ns:purchaseSector>
+                    <ns:salesBranch>Doncaster</ns:salesBranch>
+                    <ns:salesCostCentre>DOIND1</ns:salesCostCentre>
+                    <ns:salesDepartment>GXOL8106 - Gxo Logistics Uk Limited - Neuven</ns:salesDepartment>
+                    <ns:salesDivision xsi:nil="true"/>
+                    <ns:salesLocation xsi:nil="true"/>
+                    <ns:salesProject xsi:nil="true"/>
+                    <ns:salesSector xsi:nil="true"/>
+                </ns:financials>
+                <ns:freehandRef xsi:nil="true"/>
+                <ns:fullyInvoiced>false</ns:fullyInvoiced>
+                <ns:fundsReceived>false</ns:fundsReceived>
+                <ns:hidden>false</ns:hidden>
+                <ns:holiday>0.00</ns:holiday>
+                <ns:holidayAccrueRate>0.1207</ns:holidayAccrueRate>
+                <ns:holidayApprenticeshipLevy>0</ns:holidayApprenticeshipLevy>
+                <ns:holidayErni>1.17</ns:holidayErni>
+                <ns:holidayPension>0.11</ns:holidayPension>
+                <ns:id>1691067</ns:id>
+                <ns:internalComment>Generated automatically from Week Processor</ns:internalComment>
+                <ns:invoiceInfo xsi:type="ns:InvoiceInfo">
+                    <ns:acceptedDate xsi:nil="true"/>
+                    <ns:additionalRecipients xsi:nil="true"/>
+                    <ns:adjustment>false</ns:adjustment>
+                    <ns:adviceNoteRefCode xsi:nil="true"/>
+                    <ns:companyNo xsi:nil="true"/>
+                    <ns:companyVatNo xsi:nil="true"/>
+                    <ns:creditReason xsi:nil="true"/>
+                    <ns:currency>GBP</ns:currency>
+                    <ns:customText xsi:nil="true"/>
+                    <ns:dateCreated xsi:nil="true"/>
+                    <ns:dueDate xsi:nil="true"/>
+                    <ns:eInvoice>false</ns:eInvoice>
+                    <ns:eInvoiceExternalReference xsi:nil="true"/>
+                    <ns:eInvoiceId xsi:nil="true"/>
+                    <ns:eInvoiceNumber xsi:nil="true"/>
+                    <ns:eInvoiceSchemeId xsi:nil="true"/>
+                    <ns:entityId>236226</ns:entityId>
+                    <ns:entityName xsi:nil="true"/>
+                    <ns:entityRefCode>195b589f-6117-4616-a0c7-142adcec3c04</ns:entityRefCode>
+                    <ns:entityType>Worker</ns:entityType>
+                    <ns:exchangeDate xsi:nil="true"/>
+                    <ns:exchangeRate xsi:nil="true"/>
+                    <ns:exchangeRates>1 GBP = 1 GBP</ns:exchangeRates>
+                    <ns:exportBatch xsi:nil="true"/>
+                    <ns:exported xsi:nil="true"/>
+                    <ns:gross>142.33</ns:gross>
+                    <ns:hasEverBeenCredited xsi:nil="true"/>
+                    <ns:internalComment xsi:nil="true"/>
+                    <ns:invoiceDate>2025-08-20T00:00:00.000+01:00</ns:invoiceDate>
+                    <ns:invoiceDescription>Client Invoice</ns:invoiceDescription>
+                    <ns:invoiceGUID>9de913b2-fbef-40db-9525-a47ff00cc1b6</ns:invoiceGUID>
+                    <ns:invoiceGroupInfo xsi:nil="true"/>
+                    <ns:invoiceGroupLineInfo xsi:nil="true"/>
+                    <ns:invoiceLineInfo xsi:nil="true"/>
+                    <ns:invoiceNumber>0000915</ns:invoiceNumber>
+                    <ns:lastUpdated xsi:nil="true"/>
+                    <ns:negativeNet>false</ns:negativeNet>
+                    <ns:net>118.61</ns:net>
+                    <ns:paid xsi:nil="true"/>
+                    <ns:paidAmount xsi:nil="true"/>
+                    <ns:paymentExportBatch xsi:nil="true"/>
+                    <ns:paymentExportedDate xsi:nil="true"/>
+                    <ns:purchaseOrderNum xsi:nil="true"/>
+                    <ns:recipientContact xsi:nil="true"/>
+                    <ns:relatesToInvoiceGUID xsi:nil="true"/>
+                    <ns:relatesToInvoiceNumber xsi:nil="true"/>
+                    <ns:selfBilling>false</ns:selfBilling>
+                    <ns:senderContact xsi:nil="true"/>
+                    <ns:sentDate xsi:nil="true"/>
+                    <ns:supplierInvoiceRefCode xsi:nil="true"/>
+                    <ns:taxCode xsi:nil="true"/>
+                    <ns:termsDays xsi:nil="true"/>
+                    <ns:uploadedDate xsi:nil="true"/>
+                    <ns:vat>23.72</ns:vat>
+                    <ns:vatOnly>false</ns:vatOnly>
+                    <ns:whtNetAmount>0</ns:whtNetAmount>
+                    <ns:whtTaxCode xsi:nil="true"/>
+                    <ns:whtVatAmount>0</ns:whtVatAmount>
+                    <ns:writtenOff xsi:nil="true"/>
+                </ns:invoiceInfo>
+                <ns:marginCharge>118.6099999999999994315658113919198513031005859375</ns:marginCharge>
+                <ns:marginPay>88.522500000000007958078640513122081756591796875</ns:marginPay>
+                <ns:modified>2025-08-20T18:10:32.000+01:00</ns:modified>
+                <ns:payOnHold>false</ns:payOnHold>
+                <ns:payOnHoldReason xsi:nil="true"/>
+                <ns:payOnHoldReasonCode xsi:nil="true"/>
+                <ns:payrollRef xsi:nil="true"/>
+                <ns:pension>0.89</ns:pension>
+                <ns:periodEndDate>2025-08-09</ns:periodEndDate>
+                <ns:periodStartDate>2025-08-03</ns:periodStartDate>
+                <ns:placementExternalRef>P-4414</ns:placementExternalRef>
+                <ns:placementId>1252480</ns:placementId>
+                <ns:placementRefCode>a9dea4c9-d447-4a8d-9270-72ec8db751f8</ns:placementRefCode>
+                <ns:purchaseOnCostValue>0</ns:purchaseOnCostValue>
+                <ns:purchaseOrderNum xsi:nil="true"/>
+                <ns:purchaseOrderNumOverride xsi:nil="true"/>
+                <ns:purchaseWrittenOff>false</ns:purchaseWrittenOff>
+                <ns:refCode>8d5552ca-7833-433f-bb6a-b8726112b6f2</ns:refCode>
+                <ns:rejected xsi:nil="true"/>
+                <ns:salesOnCostValue>0</ns:salesOnCostValue>
+                <ns:salesWrittenOff>false</ns:salesWrittenOff>
+                <ns:shifts xsi:type="ns:Shift">
+                    <ns:billInvoiceRequired>1</ns:billInvoiceRequired>
+                    <ns:comment xsi:nil="true"/>
+                    <ns:customText1 xsi:nil="true"/>
+                    <ns:customText2 xsi:nil="true"/>
+                    <ns:customText3 xsi:nil="true"/>
+                    <ns:customText4 xsi:nil="true"/>
+                    <ns:customText5 xsi:nil="true"/>
+                    <ns:customText6 xsi:nil="true"/>
+                    <ns:day>1754262000000</ns:day>
+                    <ns:decimal>4.00</ns:decimal>
+                    <ns:finishTime xsi:nil="true"/>
+                    <ns:hours>14400000</ns:hours>
+                    <ns:hoursWorked xsi:nil="true"/>
+                    <ns:id>9874737</ns:id>
+                    <ns:mealBreak>0</ns:mealBreak>
+                    <ns:onCostValues xsi:type="ns:OnCostValues">
+                        <ns:purchaseOnCost1 xsi:nil="true"/>
+                        <ns:purchaseOnCost1Config xsi:nil="true"/>
+                        <ns:purchaseOnCost2 xsi:nil="true"/>
+                        <ns:purchaseOnCost2Config xsi:nil="true"/>
+                        <ns:purchaseOnCost3 xsi:nil="true"/>
+                        <ns:purchaseOnCost3Config xsi:nil="true"/>
+                        <ns:purchaseOnCost4 xsi:nil="true"/>
+                        <ns:purchaseOnCost4Config xsi:nil="true"/>
+                        <ns:purchaseOnCost5 xsi:nil="true"/>
+                        <ns:purchaseOnCost5Config xsi:nil="true"/>
+                        <ns:salesOnCost1 xsi:nil="true"/>
+                        <ns:salesOnCost1Config xsi:nil="true"/>
+                        <ns:salesOnCost2 xsi:nil="true"/>
+                        <ns:salesOnCost2Config xsi:nil="true"/>
+                        <ns:salesOnCost3 xsi:nil="true"/>
+                        <ns:salesOnCost3Config xsi:nil="true"/>
+                        <ns:salesOnCost4 xsi:nil="true"/>
+                        <ns:salesOnCost4Config xsi:nil="true"/>
+                        <ns:salesOnCost5 xsi:nil="true"/>
+                        <ns:salesOnCost5Config xsi:nil="true"/>
+                    </ns:onCostValues>
+                    <ns:payInvoiceRequired>0</ns:payInvoiceRequired>
+                    <ns:purchaseOnCostValue>0</ns:purchaseOnCostValue>
+                    <ns:purchaseOrderNumber xsi:nil="true"/>
+                    <ns:rate xsi:type="ns:Rate">
+                        <ns:awr xsi:nil="true"/>
+                        <ns:backendRef xsi:nil="true"/>
+                        <ns:charge>16.3600</ns:charge>
+                        <ns:chargeable>true</ns:chargeable>
+                        <ns:commentsEnabled>false</ns:commentsEnabled>
+                        <ns:completed xsi:nil="true"/>
+                        <ns:effectiveFrom xsi:nil="true"/>
+                        <ns:frontendRef xsi:nil="true"/>
+                        <ns:id>-1</ns:id>
+                        <ns:milestone>false</ns:milestone>
+                        <ns:name>Normal</ns:name>
+                        <ns:pay>12.2100</ns:pay>
+                        <ns:payElementCode>NORMAL</ns:payElementCode>
+                        <ns:payElementRefCode xsi:nil="true"/>
+                        <ns:payable>true</ns:payable>
+                        <ns:period>hourly</ns:period>
+                        <ns:periodDuration>60</ns:periodDuration>
+                        <ns:priorityOrder xsi:nil="true"/>
+                        <ns:proRata>false</ns:proRata>
+                        <ns:refCode xsi:nil="true"/>
+                        <ns:secondaryPay>0.0000</ns:secondaryPay>
+                        <ns:selectableByWorkers>false</ns:selectableByWorkers>
+                        <ns:taxable>true</ns:taxable>
+                        <ns:timePattern>DEFAULT</ns:timePattern>
+                        <ns:timesheetFields>HOURS</ns:timesheetFields>
+                    </ns:rate>
+                    <ns:rateId>10976807</ns:rateId>
+                    <ns:rateName>Normal</ns:rateName>
+                    <ns:rateRefCode>f3e5aeb4-9548-4a77-8bfa-080b4164235b</ns:rateRefCode>
+                    <ns:refCode>9c070b3f-1d4c-4b9a-94ec-2bcfef424b03</ns:refCode>
+                    <ns:salesOnCostValue>0</ns:salesOnCostValue>
+                    <ns:startTime xsi:nil="true"/>
+                </ns:shifts>
+                <ns:shifts xsi:type="ns:Shift">
+                    <ns:billInvoiceRequired>1</ns:billInvoiceRequired>
+                    <ns:comment xsi:nil="true"/>
+                    <ns:customText1 xsi:nil="true"/>
+                    <ns:customText2 xsi:nil="true"/>
+                    <ns:customText3 xsi:nil="true"/>
+                    <ns:customText4 xsi:nil="true"/>
+                    <ns:customText5 xsi:nil="true"/>
+                    <ns:customText6 xsi:nil="true"/>
+                    <ns:day>1754262000000</ns:day>
+                    <ns:decimal>3.25</ns:decimal>
+                    <ns:finishTime xsi:nil="true"/>
+                    <ns:hours>11700000</ns:hours>
+                    <ns:hoursWorked xsi:nil="true"/>
+                    <ns:id>9874740</ns:id>
+                    <ns:mealBreak>0</ns:mealBreak>
+                    <ns:onCostValues xsi:type="ns:OnCostValues">
+                        <ns:purchaseOnCost1 xsi:nil="true"/>
+                        <ns:purchaseOnCost1Config xsi:nil="true"/>
+                        <ns:purchaseOnCost2 xsi:nil="true"/>
+                        <ns:purchaseOnCost2Config xsi:nil="true"/>
+                        <ns:purchaseOnCost3 xsi:nil="true"/>
+                        <ns:purchaseOnCost3Config xsi:nil="true"/>
+                        <ns:purchaseOnCost4 xsi:nil="true"/>
+                        <ns:purchaseOnCost4Config xsi:nil="true"/>
+                        <ns:purchaseOnCost5 xsi:nil="true"/>
+                        <ns:purchaseOnCost5Config xsi:nil="true"/>
+                        <ns:salesOnCost1 xsi:nil="true"/>
+                        <ns:salesOnCost1Config xsi:nil="true"/>
+                        <ns:salesOnCost2 xsi:nil="true"/>
+                        <ns:salesOnCost2Config xsi:nil="true"/>
+                        <ns:salesOnCost3 xsi:nil="true"/>
+                        <ns:salesOnCost3Config xsi:nil="true"/>
+                        <ns:salesOnCost4 xsi:nil="true"/>
+                        <ns:salesOnCost4Config xsi:nil="true"/>
+                        <ns:salesOnCost5 xsi:nil="true"/>
+                        <ns:salesOnCost5Config xsi:nil="true"/>
+                    </ns:onCostValues>
+                    <ns:payInvoiceRequired>0</ns:payInvoiceRequired>
+                    <ns:purchaseOnCostValue>0</ns:purchaseOnCostValue>
+                    <ns:purchaseOrderNumber xsi:nil="true"/>
+                    <ns:rate xsi:type="ns:Rate">
+                        <ns:awr xsi:nil="true"/>
+                        <ns:backendRef xsi:nil="true"/>
+                        <ns:charge>16.3600</ns:charge>
+                        <ns:chargeable>true</ns:chargeable>
+                        <ns:commentsEnabled>false</ns:commentsEnabled>
+                        <ns:completed xsi:nil="true"/>
+                        <ns:effectiveFrom xsi:nil="true"/>
+                        <ns:frontendRef xsi:nil="true"/>
+                        <ns:id>-1</ns:id>
+                        <ns:milestone>false</ns:milestone>
+                        <ns:name>Normal</ns:name>
+                        <ns:pay>12.2100</ns:pay>
+                        <ns:payElementCode>NORMAL</ns:payElementCode>
+                        <ns:payElementRefCode xsi:nil="true"/>
+                        <ns:payable>true</ns:payable>
+                        <ns:period>hourly</ns:period>
+                        <ns:periodDuration>60</ns:periodDuration>
+                        <ns:priorityOrder xsi:nil="true"/>
+                        <ns:proRata>false</ns:proRata>
+                        <ns:refCode xsi:nil="true"/>
+                        <ns:secondaryPay>0.0000</ns:secondaryPay>
+                        <ns:selectableByWorkers>false</ns:selectableByWorkers>
+                        <ns:taxable>true</ns:taxable>
+                        <ns:timePattern>DEFAULT</ns:timePattern>
+                        <ns:timesheetFields>HOURS</ns:timesheetFields>
+                    </ns:rate>
+                    <ns:rateId>10976807</ns:rateId>
+                    <ns:rateName>Normal</ns:rateName>
+                    <ns:rateRefCode>f3e5aeb4-9548-4a77-8bfa-080b4164235b</ns:rateRefCode>
+                    <ns:refCode>84d4c5b3-61db-43fc-861e-7c27c588efe6</ns:refCode>
+                    <ns:salesOnCostValue>0</ns:salesOnCostValue>
+                    <ns:startTime xsi:nil="true"/>
+                </ns:shifts>
+                <ns:status>Exported</ns:status>
+                <ns:submitted>2025-08-14T14:12:50.000+01:00</ns:submitted>
+                <ns:submitterId>236226</ns:submitterId>
+                <ns:taxMonth xsi:nil="true"/>
+                <ns:taxWeek>19</ns:taxWeek>
+                <ns:taxYear>2025</ns:taxYear>
+                <ns:timesheetCharge>118.6099999999999994315658113919198513031005859375</ns:timesheetCharge>
+                <ns:timesheetFileBase64 xsi:nil="true"/>
+                <ns:timesheetFileName xsi:nil="true"/>
+                <ns:timesheetPay>88.5199999999999960209606797434389591217041015625</ns:timesheetPay>
+                <ns:timesheetStatus>5</ns:timesheetStatus>
+                <ns:workerId>236226</ns:workerId>
+            </ns:return>
+        </ns:getTimesheetByIdResponse>
+    </soapenv:Body>
+</soapenv:Envelope>

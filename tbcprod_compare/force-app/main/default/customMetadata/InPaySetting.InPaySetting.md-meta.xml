@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>InPay Setting</label>
+    <protected>false</protected>
+    <values>
+        <field>AuthenticatePayload__c</field>
+        <value xsi:type="xsd:string">grant_type=password&amp;companyId={0}&amp;username={1}&amp;password={2}</value>
+    </values>
+    <values>
+        <field>CompanyId__c</field>
+        <value xsi:type="xsd:string">1639</value>
+    </values>
+    <values>
+        <field>Endpoint__c</field>
+        <value xsi:type="xsd:string">callout:Inpay</value>
+    </values>
+    <values>
+        <field>Password__c</field>
+        <value xsi:type="xsd:string">}GyIuMLEE.c,8_#i</value>
+    </values>
+    <values>
+        <field>Username__c</field>
+        <value xsi:type="xsd:string">1218-TBCInpayWSUser</value>
+    </values>
+</CustomMetadata>

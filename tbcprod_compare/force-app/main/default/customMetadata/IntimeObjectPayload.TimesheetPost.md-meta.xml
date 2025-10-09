@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Timesheet Post</label>
+    <protected>false</protected>
+    <values>
+        <field>InTimeObject__c</field>
+        <value xsi:type="xsd:string">Timesheet</value>
+    </values>
+    <values>
+        <field>IntimeFieldReference__c</field>
+        <value xsi:type="xsd:string">InTimeId__c</value>
+    </values>
+    <values>
+        <field>MethodName__c</field>
+        <value xsi:type="xsd:string">urn:createOrUpdateTimesheets</value>
+    </values>
+    <values>
+        <field>Payload__c</field>
+        <value xsi:type="xsd:string">&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+    &lt;soap:Body&gt;
+        &lt;ns:createOrUpdateTimesheets xmlns:ns=&quot;http://v3_12.webservices.intime.ipfour.com/xsd&quot;&gt;
+            &lt;ns:token&gt;{0}&lt;/ns:token&gt;
+            {1}
+            &lt;ns:submit&gt;true&lt;/ns:submit&gt;
+            &lt;ns:idField&gt;id&lt;/ns:idField&gt;
+            &lt;ns:updateIfExists&gt;true&lt;/ns:updateIfExists&gt;
+        &lt;/ns:createOrUpdateTimesheets&gt;
+    &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</value>
+    </values>
+    <values>
+        <field>ResponseElementName__c</field>
+        <value xsi:type="xsd:string">createOrUpdateTimesheetsResponse</value>
+    </values>
+    <values>
+        <field>Type__c</field>
+        <value xsi:type="xsd:string">Post</value>
+    </values>
+</CustomMetadata>

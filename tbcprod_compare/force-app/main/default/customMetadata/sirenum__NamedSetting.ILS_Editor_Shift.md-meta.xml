@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>ILS_Editor_Shift</label>
+    <protected>false</protected>
+    <values>
+        <field>sirenum__Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>sirenum__Configuration__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;layout&quot;: {
+    &quot;sections&quot;: [
+      {
+        &quot;columns&quot;: 2,
+        &quot;fields&quot;: [
+          {
+            &quot;name&quot;: &quot;sirenum__Scheduled_Start_Time__c&quot;},
+          {  &quot;name&quot;: &quot;sirenum__Scheduled_End_Time__c&quot;,
+            &quot;startRow&quot;: true,
+            &quot;span&quot;: 2
+          },
+          {
+            &quot;name&quot;: &quot;sirenum__Actual_Start_Time__c&quot;},
+          {  &quot;name&quot;: &quot;sirenum__Actual_End_Time__c&quot;},
+          {  &quot;name&quot;: &quot;First_Shift__c&quot;},
+          {  &quot;name&quot;: &quot;Create_First_Shift_Task__c&quot;,
+            &quot;span&quot;: 2
+          }
+        ]
+      },
+      {
+        &quot;columns&quot;: 2,
+        &quot;fields&quot;: [{ &quot;name&quot;: &quot;sirenum__Scheduling_Comments__c&quot; },
+        { &quot;name&quot;: &quot;Driving_Hours__c&quot;,
+        &quot;startRow&quot;: true,
+        &quot;span&quot;: 1
+        },
+        { &quot;name&quot;: &quot;Check_In_is_Required__c&quot; },
+        { &quot;name&quot;: &quot;Checked_In__c&quot; },
+        { &quot;name&quot;: &quot;Employee_was_Late__c&quot; }
+    ]
+      }
+    ]
+  }
+}</value>
+    </values>
+    <values>
+        <field>sirenum__Schema__c</field>
+        <value xsi:type="xsd:string">https://sirenum.com/schema/2022/04/schedule-definition.json</value>
+    </values>
+</CustomMetadata>

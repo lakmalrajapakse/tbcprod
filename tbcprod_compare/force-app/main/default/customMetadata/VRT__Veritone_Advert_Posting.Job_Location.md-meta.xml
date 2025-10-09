@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Job Location</label>
+    <protected>false</protected>
+    <values>
+        <field>VRT__Default_Value__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>VRT__Description__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>VRT__Example_Data__c</field>
+        <value xsi:type="xsd:string">London</value>
+    </values>
+    <values>
+        <field>VRT__IsActive__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>VRT__Record_Type__c</field>
+        <value xsi:type="xsd:string">Consulting,Fixed_Term_Booking,Permanent,Retained,Shift_Work</value>
+    </values>
+    <values>
+        <field>VRT__Salesforce_Field_API__c</field>
+        <value xsi:type="xsd:string">TR1__City__c</value>
+    </values>
+    <values>
+        <field>VRT__Salesforce_Object__c</field>
+        <value xsi:type="xsd:string">TR1__Job__c</value>
+    </values>
+    <values>
+        <field>VRT__Transform__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>VRT__Veritone_API_Field__c</field>
+        <value xsi:type="xsd:string">transaction.advert.location_query</value>
+    </values>
+</CustomMetadata>

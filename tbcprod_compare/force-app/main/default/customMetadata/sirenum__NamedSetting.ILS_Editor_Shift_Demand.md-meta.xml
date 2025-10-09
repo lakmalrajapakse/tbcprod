@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>ILS_Editor_Shift_Demand</label>
+    <protected>false</protected>
+    <values>
+        <field>sirenum__Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>sirenum__Configuration__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;layout&quot;: {
+    &quot;sections&quot;: [
+      {
+        &quot;columns&quot;: 4,
+        &quot;fields&quot;: [
+          {
+            &quot;name&quot;: &quot;sirenum__Scheduled_Start_Time__c&quot;,
+            &quot;startRow&quot;: true,
+            &quot;span&quot;: 2
+          },
+          {
+            &quot;name&quot;: &quot;sirenum__Scheduled_End_Time__c&quot;,
+            &quot;startRow&quot;: true,
+            &quot;span&quot;: 2
+          }
+        ]
+      },
+      {
+        &quot;columns&quot;: 2,
+        &quot;fields&quot;: [
+          {
+            &quot;name&quot;: &quot;sirenum__Broadcasts__c&quot;,
+            &quot;makeRequired&quot;: true,
+            &quot;startRow&quot;: true
+          },
+          { &quot;name&quot;: &quot;s5m__BH4SFJob__c&quot; },
+          { &quot;name&quot;: &quot;sirenum__Team__c&quot;, &quot;startRow&quot;: true },
+          { &quot;name&quot;: &quot;sirenum__Site__c&quot;, &quot;startRow&quot;: true},
+          { &quot;name&quot;: &quot;sirenum__Location__c&quot; },
+          { &quot;name&quot;: &quot;sirenum__Rota__c&quot;, &quot;startRow&quot;: true }
+        ]
+      },
+      {
+        &quot;columns&quot;: 1,
+        &quot;fields&quot;: [{ &quot;name&quot;: &quot;sirenum__Scheduling_Comments__c&quot; }]
+      }
+    ]
+  }
+}</value>
+    </values>
+    <values>
+        <field>sirenum__Schema__c</field>
+        <value xsi:type="xsd:string">https://sirenum.com/schema/2022/04/schedule-definition.json</value>
+    </values>
+</CustomMetadata>

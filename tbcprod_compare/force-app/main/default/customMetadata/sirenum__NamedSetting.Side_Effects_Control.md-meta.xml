@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Side_Effects_Control</label>
+    <protected>false</protected>
+    <values>
+        <field>sirenum__Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>sirenum__Configuration__c</field>
+        <value xsi:type="xsd:string">{
+  &quot;general&quot;: {
+    &quot;maximumMergeGap&quot;: &quot;P1D&quot;
+  },
+  &quot;processors&quot;: {
+    &quot;sirenum.RulesSideEffect&quot;: {
+      &quot;maximumShiftsPerTransaction&quot;: 50,
+      &quot;background&quot;: {
+        &quot;maximumRecordLocks&quot;: 50
+      },
+      &quot;foreground&quot;: {
+        &quot;maximumRecordLocks&quot;: 50
+      },
+      &quot;merging&quot;: {
+        &quot;maximumRecordLocks&quot;: 50
+      }
+    }
+  }
+}</value>
+    </values>
+    <values>
+        <field>sirenum__Schema__c</field>
+        <value xsi:type="xsd:string">https://sirenum.com/schema/2023/02/side-effects-control.json</value>
+    </values>
+</CustomMetadata>

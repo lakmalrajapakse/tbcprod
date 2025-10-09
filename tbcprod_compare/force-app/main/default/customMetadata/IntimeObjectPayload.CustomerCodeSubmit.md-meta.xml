@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Customer Code Submit</label>
+    <protected>false</protected>
+    <values>
+        <field>InTimeObject__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>IntimeFieldReference__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>MethodName__c</field>
+        <value xsi:type="xsd:string">urn:createOrUpdateFinancialTag</value>
+    </values>
+    <values>
+        <field>Payload__c</field>
+        <value xsi:type="xsd:string">&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+&lt;soap:Body&gt;
+&lt;ns:createOrUpdateFinancialTag xmlns:ns=&quot;http://v3_12.webservices.intime.ipfour.com/xsd&quot;&gt;
+&lt;ns:token&gt;{0}&lt;/ns:token&gt;
+&lt;ns:tagCategory&gt;
+&lt;ns:hidden&gt;false&lt;/ns:hidden&gt;
+&lt;ns:label&gt;Customer Code&lt;/ns:label&gt;
+&lt;ns:name&gt;PurchaseSector&lt;/ns:name&gt;
+{1}
+&lt;/ns:tagCategory&gt;
+&lt;/ns:createOrUpdateFinancialTag&gt;
+&lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</value>
+    </values>
+    <values>
+        <field>ResponseElementName__c</field>
+        <value xsi:type="xsd:string">createOrUpdateFinancialTag</value>
+    </values>
+    <values>
+        <field>Type__c</field>
+        <value xsi:type="xsd:string">Customer Code Submit</value>
+    </values>
+</CustomMetadata>
