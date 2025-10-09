@@ -147,7 +147,7 @@ public with sharing class SIM_LookupSearchController {
     @AuraEnabled(cacheable=true)
     public static List<Map<String, String>> getPayrollCycles() {
         List<sirenum__Week__c> records = [
-            SELECT Id, Name, sirenum__Week_Ending__c, sirenum__Start_Date__c, sirenum__Locked__c
+            SELECT Id, Name, sirenum__Week_Ending__c, sirenum__Start_Date__c, Is_Locked__c
             FROM sirenum__Week__c
             ORDER BY sirenum__Start_Date__c DESC
         ];
@@ -159,7 +159,7 @@ public with sharing class SIM_LookupSearchController {
                 new Map<String, String>{
                     'label' => record.Name != null ? record.Name : 'Unknown',
                     'value' => record.Id,
-                    'locked' => record.sirenum__Locked__c ? 'true' : 'false',
+                    'locked' => record.Is_Locked__c ? 'true' : 'false',
                     'startDate' => record.sirenum__Start_Date__c != null
                         ? record.sirenum__Start_Date__c.format()
                         : 'N/A',

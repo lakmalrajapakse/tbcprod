@@ -16,13 +16,15 @@ export default class PayrollCycleSelector extends LightningElement {
                     label: 'None',
                     value: 'None',  // Assuming value should be 'None' for the placeholder
                     startDate: null,  // Set to null or any appropriate placeholder
-                    endDate: null      // Set to null or any appropriate placeholder
+                    endDate: null,      // Set to null or any appropriate placeholder
+                    locked: 'false'
                 },
                 ...data.map(item => ({
                     label: `${item.startDate} - ${item.endDate}`,  // Correct format
                     value: item.value,
                     startDate: item.startDate,
-                    endDate: item.endDate
+                    endDate: item.endDate,
+                    locked: item.locked
                 }))
             ];
     
@@ -41,11 +43,13 @@ export default class PayrollCycleSelector extends LightningElement {
         if (selectedCycle && this.selectedPayrollCycle != 'None') {
             this.weekStart = this.convertFormat(selectedCycle.startDate);
             this.weekEnd = this.convertFormat(selectedCycle.endDate);
+            this.locked = selectedCycle.locked;
         }
         else
         {
-            this.weekStart= 'None';
-            this.weekEnd = 'None'; 
+            this.weekStart= null;
+            this.weekEnd = null; 
+            this.locked = 'false';
         }
         console.log('📅 Week Start:', this.weekStart);
         console.log('📅 Week End:', this.weekEnd);
@@ -55,7 +59,8 @@ export default class PayrollCycleSelector extends LightningElement {
             detail: {
                 cycle: this.selectedPayrollCycle != 'None' ? this.selectedPayrollCycle : null,
                 startDate: this.weekStart,
-                endDate: this.weekEnd
+                endDate: this.weekEnd,
+                locked: this.locked
             }
         });
 

@@ -118,7 +118,7 @@ export default class Utils {
                 lengthMinusBreaks: record?.sirenum__Absolute_Shift_Length__c ? record?.sirenum__Absolute_Shift_Length__c :
                     Utils.calculateShiftLength(record?.sirenum__Absolute_End_Time__c, record?.sirenum__Absolute_Start_Time__c),
                 site: record?.sirenum__Site__c,
-                siteName: record?.Site_Value_for_Import_Export__c,
+                siteName: record?.sirenum__Site__r?.Name,
                 account: record?.sirenum__Site__r?.sirenum__Operating_Company__c,
                 accountName: record?.sirenum__Site__r?.sirenum__Operating_Company__r?.Name,
                 hasQuery: record?.Queried__c,
@@ -126,10 +126,11 @@ export default class Utils {
                 shiftName: record?.Name ?? '',
                 shiftRota: record?.Rota_Value_for_Import_Export__c ?? '',
                 jobRole: record?.Job_Role_Value_for_Import_Export__c ?? '',
+                jobRoleName: record?.sirenum__Team__r?.Name,
                 comments: record?.sirenum__Scheduling_Comments__c ?? '',
                 //
                 externalIDOrIDOfShift: ExternalIDValue,
-                workerName: record?.sirenum__Contact__r?.Name ?? '',
+                workerName: record?.sirenum__Employee_Name__c ?? '',
                 isApproved: record?.sirenum__Allow_pay__c && record?.sirenum__Allow_charge__c,
                 //isApproved: record?.Approved__c ?? '',
                 isConsultantApproved: record?.Is_Approved__c,
@@ -331,10 +332,10 @@ export default class Utils {
 
     static sortByContact(records = []) {
         records.sort((a, b) => {
-            if (a.shift.sirenum__Contact__r?.Name < b.shift?.sirenum__Contact__r?.Name) {
+            if (a.shift?.sirenum__Employee_Name__c < b.shift?.sirenum__Employee_Name__c) {
                 return -1;
             }
-            if (a.shift?.sirenum__Contact__r?.Name > b.shift?.sirenum__Contact__r?.Name) {
+            if (a.shift?.sirenum__Employee_Name__c > b.shift?.sirenum__Employee_Name__c) {
                 return 1;
             }
             // a must be equal to b

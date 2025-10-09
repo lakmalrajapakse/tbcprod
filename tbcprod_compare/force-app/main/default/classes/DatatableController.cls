@@ -156,11 +156,11 @@ public without sharing class DatatableController {
                 if (filtersMap.containsKey('accounts') && !String.isBlank(String.valueOf(filtersMap.get('accounts'))) && String.valueOf(filtersMap.get('accounts')) != '()') filterStringList.add('sirenum__Client__c IN (\'' + String.join(new List<String>(String.valueOf(filtersMap.get('accounts')).replace('(','').replace(')','').deleteWhitespace().split(',')),'\',\'') + '\')');
                 if (filtersMap.containsKey('contacts') && !String.isBlank(String.valueOf(filtersMap.get('contacts'))) && String.valueOf(filtersMap.get('contacts')) != '()') filterStringList.add('sirenum__Worker__c IN (\'' + String.join(new List<String>(String.valueOf(filtersMap.get('contacts')).replace('(','').replace(')','').deleteWhitespace().split(',')),'\',\'') + '\')');
                 if (filtersMap.containsKey('weeks') && !String.isBlank(String.valueOf(filtersMap.get('weeks'))) && String.valueOf(filtersMap.get('weeks')) != '()') filterStringList.add('sirenum__Week__c IN (\'' + String.join(new List<String>(String.valueOf(filtersMap.get('weeks')).replace('(','').replace(')','').deleteWhitespace().split(',')),'\',\'') + '\')');
+                if (filtersMap.containsKey('hasIncludeDelayedProcessingClientTimesheet') && filtersMap.get('hasIncludeDelayedProcessingClientTimesheet') == true) filterStringList.add('sirenum__Client__r.DelayedProcessing__c = false');
             }
             String soqlQuery = 'SELECT Id, Name, sirenum__Worker__c, sirenum__Worker__r.Name, Placement__c, Placement__r.Name, '+
                 'sirenum__Week__c, sirenum__Week__r.Name, sirenum__Total_Charge__c, sirenum__Total_Pay__c, sirenum__Profit__c FROM sirenum__Timesheet__c '+
                    'WHERE Status__c = \''+IntimeConstants.TIMESHEET_STATUS_SUBMITTED+'\' '+(!filterStringList.isEmpty() ? 'AND '+String.join(filterStringList,' AND ') : '')+' ORDER BY Name LIMIT 50000';
-            System.debug('Query is '+soqlQuery);
             List<sirenum__Timesheet__c> timesheetsList = (List<sirenum__Timesheet__c>)Database.query(soqlQuery);
             for (sirenum__Timesheet__c timesheet : timesheetsList) {
                 Map<String, Object> objectsMap = new Map<String, Object>();
@@ -685,11 +685,13 @@ public without sharing class DatatableController {
                 if (!planCodesList.isEmpty()) filterStringList.add('PlanCode__r.Name IN (\'' + String.join(new List<String>(planCodesList),'\',\'') + '\')');
                 if (filtersMap.containsKey('accounts') && !String.isBlank(String.valueOf(filtersMap.get('accounts'))) && String.valueOf(filtersMap.get('accounts')) != '()') filterStringList.add('sirenum__Contract__r.sirenum__Client__c IN (\'' + String.join(new List<String>(String.valueOf(filtersMap.get('accounts')).replace('(','').replace(')','').deleteWhitespace().split(',')),'\',\'') + '\')');
                 if (filtersMap.containsKey('contacts') && !String.isBlank(String.valueOf(filtersMap.get('contacts'))) && String.valueOf(filtersMap.get('contacts')) != '()') filterStringList.add('sirenum__Contact__c IN (\'' + String.join(new List<String>(String.valueOf(filtersMap.get('contacts')).replace('(','').replace(')','').deleteWhitespace().split(',')),'\',\'') + '\')');
+                if (filtersMap.containsKey('hasTimesheets') && filtersMap.get('hasTimesheets') == true) filterStringList.add('HasTimesheet__c = true');
             }
             String soqlQuery = 'SELECT Id, Name, sirenum__Contract__c, sirenum__Contract__r.Name, sirenum__Job_Role__c, sirenum__Job_Role__r.Name,'+
                 'sirenum__Contact__c, sirenum__Contact__r.Name, sirenum__Status__c, sirenum__Start_Date__c'+
                 ' FROM sirenum__Placement__c '+
                    'WHERE IntimeId__c = null AND SendToIntime__c = false '+(!filterStringList.isEmpty() ? 'AND '+String.join(filterStringList,' AND ') : '')+' ORDER BY Name LIMIT 50000';
+            System.debug('Soql is '+soqlQuery);
             List<sirenum__Placement__c> placementsList = (List<sirenum__Placement__c>)Database.query(soqlQuery);
             for (sirenum__Placement__c placement : placementsList) {
                 Map<String, Object> objectsMap = new Map<String, Object>();

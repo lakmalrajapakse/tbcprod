@@ -1,4 +1,4 @@
-public with sharing class SIM_ManualTimesheetGeneration {
+public without sharing class SIM_ManualTimesheetGeneration {
     public final static String UPLOAD_SUCCESS_STATUS= 'Completed';
     public final static String UPLOAD_DATAERROR_STATUS= 'Completed With Errors';
     public final static String UPLOAD_DATAWARN_STATUS= 'Completed With Warnings';
@@ -49,7 +49,7 @@ public with sharing class SIM_ManualTimesheetGeneration {
             return null;
         }
         
-        return [select id, sirenum__Start_Date__c, sirenum__Week_Ending__c from sirenum__Week__c where id = :this.mtg.Payroll_Period__c];
+        return [select id, sirenum__Start_Date__c, sirenum__Week_Ending__c, sirenum__PayrollCycle__c, is_Locked__c from sirenum__Week__c where id = :this.mtg.Payroll_Period__c];
     }
 
     public SIM_Response.Response loadSheetRows(List<Object> sheetRows) {                
@@ -70,7 +70,7 @@ public with sharing class SIM_ManualTimesheetGeneration {
         List<ShiftRow> srows = new List<ShiftRow>();
 
         Set<Id> shiftIds = new Set<Id>();
-
+        
         for (Object row: sheetRows) {            
             ShiftRow sr = new ShiftRow(template, mtg, (Map<String,Object>) row);
             srows.add(sr);
@@ -79,12 +79,28 @@ public with sharing class SIM_ManualTimesheetGeneration {
                 continue;
             }
             
-            shiftIds.add(sr.shiftIdStr);
+            shiftIds.add(sr.shiftIdStr);            
         }
 
         Map<String, sirenum__Timesheet__c> timesheets = getExistingTimesheets();
         Map<Id, sirenum__Shift__c> shifts = getShifts(shiftIds);
         sirenum__Week__c periodInfo = getPayrollPeriod();
+
+        Date minDate;
+        for (sirenum__Shift__c shift : shifts.values()) {
+            if (minDate == null || shift.sirenum__Scheduled_Local_Start_Date__c < minDate) {
+                minDate = shift.sirenum__Scheduled_Local_Start_Date__c;
+            }
+        }
+
+        List<sirenum__Week__c> periods = [
+            select id, sirenum__Start_Date__c, sirenum__Week_Ending__c 
+            from sirenum__Week__c 
+            where sirenum__PayrollCycle__c = :periodInfo.sirenum__PayrollCycle__c
+            and sirenum__Start_Date__c <= :periodInfo.sirenum__Start_Date__c
+            and sirenum__Week_Ending__c  >= :minDate
+            order by sirenum__Start_Date__c desc
+        ];
 
         Boolean hasErrors = false;
         List<sirenum__Timesheet__c> timesheetsToInsert = new List<sirenum__Timesheet__c>();
@@ -106,13 +122,27 @@ public with sharing class SIM_ManualTimesheetGeneration {
                 continue;
             }
 
-            if (periodInfo.sirenum__Start_Date__c > shift.sirenum__Scheduled_Local_Start_Date__c ||  periodInfo.sirenum__Week_Ending__c < shift.sirenum__Scheduled_Local_Start_Date__c) {
-                row.errors.add('Shift date is outside the period start and end date.');
+            Id workedPeriod = null;
+            if (periodInfo.sirenum__Week_Ending__c < shift.sirenum__Scheduled_Local_Start_Date__c) {
+                row.errors.add('Shift date is outside the pay period end date.');
                 hasErrors = true;
                 continue;
-            }            
+            }   
+            for (sirenum__Week__c p : periods) {
+                if (p.sirenum__Start_Date__c <= shift.sirenum__Scheduled_Local_Start_Date__c && p.sirenum__Week_Ending__c  >= shift.sirenum__Scheduled_Local_Start_Date__c) {
+                    workedPeriod = p.id;
+                    break;
+                }
+            }
+            if (workedPeriod == null) {
+                row.errors.add('Shift date is outside the pay periods defined for the pay cycle.');
+                hasErrors = true;
+                continue;
+            }
 
             Map<String, Object> splitKey = new Map<String, Object>();
+            splitKey.put('sirenum__Worked_Period__c', workedPeriod);
+
             for (String field : this.template.timesheetMap.timesheet.splitByFields) {
                 FieldMapDTO fieldMap = this.template.getFieldMapByTargetFieldName('timesheet', field);
                 if (fieldMap.source == 'file') {
@@ -129,7 +159,7 @@ public with sharing class SIM_ManualTimesheetGeneration {
                 timesheet = new sirenum__Timesheet__c(                    
                     Manual_Timesheet_Generation__c = this.mtg.id,
                     sirenum__Week__c = periodInfo.id,
-                    sirenum__Worked_Period__c = periodInfo.id,
+                    sirenum__Worked_Period__c = workedPeriod,
                     sirenum__Week_Ending__c = periodInfo.sirenum__Week_Ending__c
                 );
 
@@ -209,12 +239,13 @@ public with sharing class SIM_ManualTimesheetGeneration {
 
     private Map<String, sirenum__Timesheet__c> getExistingTimesheets() {           
         Id mtgId = this.mtg.id;
-        String soqlStr = 'select id, ' + String.join(this.template.timesheetMap.timesheet.splitByFields, ',') + ' from sirenum__Timesheet__c where id = :mtgId ';                                   
+        String soqlStr = 'select id, sirenum__Worked_Period__c, ' + String.join(this.template.timesheetMap.timesheet.splitByFields, ',') + ' from sirenum__Timesheet__c where Manual_Timesheet_Generation__c = :mtgId ';                                   
 
         List<sirenum__Timesheet__c> timesheets = Database.query(soqlStr);
         Map<String, sirenum__Timesheet__c> timesheetMap = new Map<String, sirenum__Timesheet__c>();
         for (sirenum__Timesheet__c ts : timesheets) {            
             Map<String, Object> splitValues = new Map<String, Object>();
+            splitValues.put('sirenum__Worked_Period__c', ts.sirenum__Worked_Period__c);
             for (String field : this.template.timesheetMap.timesheet.splitByFields) {
                 splitValues.put(field, ts.get(field));
             }

@@ -10,7 +10,7 @@
         <field>AuthenticatePayload__c</field>
         <value xsi:type="xsd:string">&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
    &lt;soap:Body&gt;
-      &lt;ns:authenticate xmlns:ns=&quot;http://v3_12.webservices.intime.ipfour.com/xsd&quot;&gt;
+      &lt;ns:authenticate xmlns:ns=&quot;http://v3_15.webservices.intime.ipfour.com/xsd&quot;&gt;
             &lt;agencyRefCode&gt;{0}&lt;/agencyRefCode&gt;
             &lt;username&gt;{1}&lt;/username&gt;
             &lt;password&gt;{2}&lt;/password&gt;
@@ -27,7 +27,7 @@
         <value xsi:type="xsd:string">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
     &lt;soap:Body&gt;
-        &lt;ns:getHolidayClaimsByRefCodes xmlns:ns=&quot;http://v3_12.webservices.intime.ipfour.com/xsd&quot;&gt;
+        &lt;ns:getHolidayClaimsByRefCodes xmlns:ns=&quot;http://v3_15.webservices.intime.ipfour.com/xsd&quot;&gt;
             &lt;ns:token&gt;{0}&lt;/ns:token&gt;
             {1}
         &lt;/ns:getHolidayClaimsByRefCodes&gt;
@@ -46,7 +46,7 @@
         <field>LeaverPayload__c</field>
         <value xsi:type="xsd:string">&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
     &lt;soap:Body&gt;
-        &lt;ns:makeLeaverById xmlns:ns=&quot;http://v3_12.webservices.intime.ipfour.com/xsd&quot;&gt;
+        &lt;ns:makeLeaverById xmlns:ns=&quot;http://v3_15.webservices.intime.ipfour.com/xsd&quot;&gt;
             &lt;ns:token&gt;{0}&lt;/ns:token&gt;
             &lt;ns:workerId&gt;{1}&lt;/ns:workerId&gt;
             &lt;ns:leavingDate&gt;{2}&lt;/ns:leavingDate&gt;
@@ -71,7 +71,7 @@
         <value xsi:type="xsd:string">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
     &lt;soap:Body&gt;
-        &lt;ns:searchHolidayClaimRefCodes xmlns:ns=&quot;http://v3_12.webservices.intime.ipfour.com/xsd&quot;&gt;
+        &lt;ns:searchHolidayClaimRefCodes xmlns:ns=&quot;http://v3_15.webservices.intime.ipfour.com/xsd&quot;&gt;
             &lt;ns:token&gt;{0}&lt;/ns:token&gt;
             &lt;ns:searchCriteria&gt;
                 &lt;ns:claimStatus&gt;Submitted&lt;/ns:claimStatus&gt;

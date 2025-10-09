@@ -18,7 +18,7 @@
         <field>Payload__c</field>
         <value xsi:type="xsd:string">&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
     &lt;soap:Body&gt;
-        &lt;ns:updateTimesheetFile xmlns:ns=&quot;http://v3_12.webservices.intime.ipfour.com/xsd&quot;&gt;
+        &lt;ns:updateTimesheetFile xmlns:ns=&quot;http://v3_15.webservices.intime.ipfour.com/xsd&quot;&gt;
             &lt;ns:token&gt;{0}&lt;/ns:token&gt;
             {1}
         &lt;/ns:updateTimesheetRefs&gt;

@@ -16,7 +16,7 @@
     </values>
     <values>
         <field>Payload__c</field>
-        <value xsi:type="xsd:string">&lt;soapenv:Envelope xmlns:ns=&quot;http://v3_12.webservices.intime.ipfour.com/xsd&quot; xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+        <value xsi:type="xsd:string">&lt;soapenv:Envelope xmlns:ns=&quot;http://v3_15.webservices.intime.ipfour.com/xsd&quot; xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
    &lt;soapenv:Header/&gt;
    &lt;soapenv:Body&gt;
        &lt;ns:createOrUpdateHolidayClaim&gt;

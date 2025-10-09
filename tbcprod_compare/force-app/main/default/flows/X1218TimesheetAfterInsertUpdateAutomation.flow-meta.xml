@@ -6,7 +6,7 @@
         <name>SetContactFields</name>
         <label>Set Contact Fields</label>
         <locationX>50</locationX>
-        <locationY>863</locationY>
+        <locationY>1163</locationY>
         <assignmentItems>
             <assignToReference>GetContact.DateWorkerSendToIntimeAsLeaver__c</assignToReference>
             <operator>Assign</operator>
@@ -22,7 +22,7 @@
         <name>ContactNotNullDecision</name>
         <label>Contact Not Null Decision</label>
         <locationX>380</locationX>
-        <locationY>323</locationY>
+        <locationY>623</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>ContactNotNull</name>
@@ -72,7 +72,7 @@
         <name>LeaverDateNotAccurateDecision</name>
         <label>Leaver Date Not Accurate Decision</label>
         <locationX>182</locationX>
-        <locationY>755</locationY>
+        <locationY>1055</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>LeaverDateNotAccurate</name>
@@ -88,6 +88,59 @@
                 <targetReference>SetContactFields</targetReference>
             </connector>
             <label>Leaver Date Not Accurate</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>PlacementNotNullDecision</name>
+        <label>Placement Not Null Decision</label>
+        <locationX>380</locationX>
+        <locationY>323</locationY>
+        <defaultConnector>
+            <targetReference>ContactNotNullDecision</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>PlacementNotNull</name>
+            <conditionLogic>1 AND (2 OR (3 AND 4)) AND 5</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Placement__c</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record__Prior</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record__Prior</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Placement__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Placement__r.HasTimesheet__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>UpdatePlacement</targetReference>
+            </connector>
+            <label>Placement Not Null</label>
         </rules>
     </decisions>
     <environments>Default</environments>
@@ -121,7 +174,7 @@
         <name>GetContact</name>
         <label>Get Contact</label>
         <locationX>182</locationX>
-        <locationY>647</locationY>
+        <locationY>947</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>LeaverDateNotAccurateDecision</targetReference>
@@ -142,7 +195,7 @@
         <name>GetIntimeSetting</name>
         <label>Get Intime Setting</label>
         <locationX>182</locationX>
-        <locationY>431</locationY>
+        <locationY>731</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>GetLatestTimesheet</targetReference>
@@ -155,7 +208,7 @@
         <name>GetLatestTimesheet</name>
         <label>Get Latest Timesheet</label>
         <locationX>182</locationX>
-        <locationY>539</locationY>
+        <locationY>839</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>GetContact</targetReference>
@@ -185,14 +238,30 @@
         <name>UpdateContact</name>
         <label>Update Contact</label>
         <locationX>50</locationX>
-        <locationY>971</locationY>
+        <locationY>1271</locationY>
         <inputReference>GetContact</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>UpdatePlacement</name>
+        <label>Update Placement</label>
+        <locationX>248</locationX>
+        <locationY>431</locationY>
+        <connector>
+            <targetReference>ContactNotNullDecision</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>HasTimesheet__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record.Placement__r</inputReference>
     </recordUpdates>
     <start>
         <locationX>254</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>ContactNotNullDecision</targetReference>
+            <targetReference>PlacementNotNullDecision</targetReference>
         </connector>
         <object>sirenum__Timesheet__c</object>
         <recordTriggerType>CreateAndUpdate</recordTriggerType>

@@ -24,6 +24,7 @@ export default class SendPlacementsToIntime extends LightningElement {
     _endDate;
     _ayncJobStatus;
     _apexJobId;
+    _showRecordsWithTimesheets;
 
     /**
     * @description Constructor
@@ -43,6 +44,7 @@ export default class SendPlacementsToIntime extends LightningElement {
         this._selectedBranches = '';
         this._apexJobId = '';
         this._ayncJobStatus = '';
+        this._showRecordsWithTimesheets = false;
     }
 
     /**
@@ -69,6 +71,7 @@ export default class SendPlacementsToIntime extends LightningElement {
             this.template.querySelector('lightning-spinner').classList.remove('slds-hide');
         }
         this._planCodesList = new Array();
+        console.log('Test is '+this._showRecordsWithTimesheets);
         getDatatable({
             'dataTableParams' : {
                 'className' : 'DatatableController.PlacementIntimeSendController',
@@ -76,7 +79,8 @@ export default class SendPlacementsToIntime extends LightningElement {
                     'plancodes' : this._selectedPlanCodes,
                     'branches' : this._selectedBranches,
                     'contacts' : this._selectedContacts,
-                    'accounts' : this._selectedAccounts
+                    'accounts' : this._selectedAccounts,
+                    'hasTimesheets' : this._showRecordsWithTimesheets
                 }
             }
         }).then(result => {
@@ -298,6 +302,13 @@ export default class SendPlacementsToIntime extends LightningElement {
     **/
     handleOnAccountSelectionChange(event) {
         this._selectedAccounts = event.detail;
+    }
+
+    /**
+    * @description Method to handle on Has Timesheet Change
+    **/
+    handleOnHasTimesheetChange(event) {
+        this._showRecordsWithTimesheets = event.detail.checked;
     }
 
     /**

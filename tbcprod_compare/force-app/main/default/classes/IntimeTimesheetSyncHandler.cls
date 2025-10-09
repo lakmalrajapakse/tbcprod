@@ -1,10 +1,8 @@
 /**
 *  @description Apex class to manage the timesheet data sync to intime
 **/
-public without sharing class IntimeTimesheetSyncHandler extends IntimeSyncHandler implements IIntimeSyncHandler{
+public with sharing class IntimeTimesheetSyncHandler extends IntimeSyncHandler implements IIntimeSyncHandler{
 
-    private List<sObject> expenseRecordsList;
-    
     /**
     *  @description Constructor
     **/
@@ -24,7 +22,10 @@ public without sharing class IntimeTimesheetSyncHandler extends IntimeSyncHandle
 
             // fetch record from the system
             this.getRecords(recordIds, inTimeObject);
-            
+
+            // Reinstate worker - LRTEM
+            //LR-TEMP this.reinstateWorkerForCurrentPeriod();
+
             // set file information
             if(inTimeObject.SendContentDocument__c) this.setFileInformation();
 
@@ -34,10 +35,6 @@ public without sharing class IntimeTimesheetSyncHandler extends IntimeSyncHandle
             //create or update timesheet in intime 
             createOrUpdateTimesheets(inTimeSyncItemsList, inTimeObject);
             
-            // create expense claim
-            if (IntimeSyncHelper.intimeObjectsByObjectNameMap.containsKey(IntimeConstants.INTIME_OBJECT_EXPENSE_CLAIM) && !inTimeObject.SendContentDocument__c) {
-                createOrUpdateExpenseClaim(inTimeSyncItemsList, IntimeSyncHelper.intimeObjectsByObjectNameMap.get(IntimeConstants.INTIME_OBJECT_EXPENSE_CLAIM));
-            }
             this.updateInTimeSyncItems(inTimeObject.SendContentDocument__c ? IntimeConstants.SALESFORCE_TO_INTIME_TIMESHEET_FILE : IntimeConstants.SALESFORCE_TO_INTIME_TIMESHEET);
             TriggerHandler.bypass(TimesheetTriggerHandler.class.getName());
             this.updateRecords();
@@ -61,6 +58,9 @@ public without sharing class IntimeTimesheetSyncHandler extends IntimeSyncHandle
         Set<String> additionalFieldsList = new Set<String>{};
         additionalFieldsList.add(sirenum__Timesheet__c.ProofUploaded__c.getDescribe().getName());
         additionalFieldsList.add(sirenum__Timesheet__c.ProofUploadedInIntime__c.getDescribe().getName());
+        additionalFieldsList.add(sirenum__Timesheet__c.sirenum__Worker__c.getDescribe().getName());
+        additionalFieldsList.add(sirenum__Timesheet__c.sirenum__Worker__c.getDescribe().getName().replace('__c','__r')+'.'+Contact.InPayReference__c.getDescribe().getName());
+        additionalFieldsList.add(sirenum__Timesheet__c.sirenum__Worker__c.getDescribe().getName().replace('__c','__r')+'.'+Contact.LeaverInformationUpdatedInInTime__c.getDescribe().getName());
         return additionalFieldsList;
     }
 
@@ -108,7 +108,7 @@ public without sharing class IntimeTimesheetSyncHandler extends IntimeSyncHandle
         for (sObject record : this.recordsList) {
             Id recordId = (Id)record.get('Id');
             Map<String, Object> fileObjectMap = new Map<String, Object>();
-            if (record.getSObjects('ContentDocumentLinks') != null && record.getSObjects('ContentDocumentLinks').size() > 0) {
+            if (record.getSObjects('ContentDocumentLinks') != null && !record.getSObjects('ContentDocumentLinks').isEmpty()) {
                 ContentDocumentLink contentDocumentLink = (ContentDocumentLink)record.getSObjects('ContentDocumentLinks')[0];
                 fileObjectMap.put('timesheetFileBase64',EncodingUtil.base64Encode(contentDocumentLink.ContentDocument.LatestPublishedVersion.VersionData));
                 fileObjectMap.put('timesheetFileName',contentDocumentLink.ContentDocument.Title+'.'+contentDocumentLink.ContentDocument.LatestPublishedVersion.FileExtension);
@@ -116,6 +116,35 @@ public without sharing class IntimeTimesheetSyncHandler extends IntimeSyncHandle
             this.objectsMap.get(recordId).putAll(fileObjectMap);
         }
     }
+
+    /**
+    *  @description Method to reinstate worker in inpay
+    **/
+    /*LR-TEMP public void reinstateWorkerForCurrentPeriod() {
+        Set<Id> workerIds = new Set<Id>();
+        for (sObject record : this.recordsList) {
+            Id recordId = (Id)record.get('Id');
+            Id workerId = (Id)record.get(sirenum__Timesheet__c.sirenum__Worker__c.getDescribe().getName());
+            String inpayReference = record.getSObject(sirenum__Timesheet__c.sirenum__Worker__c.getDescribe().getName().replace('__c','__r')).get(Contact.InPayReference__c.getDescribe().getName()) != null ? String.valueOf(record.getSObject(sirenum__Timesheet__c.sirenum__Worker__c.getDescribe().getName().replace('__c','__r')).get(Contact.InPayReference__c.getDescribe().getName())) : '';
+            Boolean leaverInformationUpdatedInTime = record.getSObject(sirenum__Timesheet__c.sirenum__Worker__c.getDescribe().getName().replace('__c','__r')).get(Contact.LeaverInformationUpdatedInInTime__c.getDescribe().getName()) != null ? Boolean.valueOf(record.getSObject(sirenum__Timesheet__c.sirenum__Worker__c.getDescribe().getName().replace('__c','__r')).get(Contact.LeaverInformationUpdatedInInTime__c.getDescribe().getName())) : false;
+            if (leaverInformationUpdatedInTime && !String.isBlank(inpayReference) && !workerIds.contains(workerId)) {
+                if (Test.isRunningTest()) IntimeCalloutMock.systemName = 'Inpay';
+                this.intimeSyncItemByRecordIdMap.get(recordId).InTimeSyncLog__c = 'ReinstateWorkerInInpay is '+JSON.serialize(new Map<String, String>{'ReinstateReason' => '2'});
+                String reinstateWorkerInInpayResponse = InpaySyncHelper.reinstateWorkerForCurrentPeriod(inpayReference);
+                this.intimeSyncItemByRecordIdMap.get(recordId).InTimeSyncLog__c += '\r\n\r\nReinstateWorkerInInpay Response is '+reinstateWorkerInInpayResponse;
+                if (!String.isBlank(reinstateWorkerInInpayResponse)) {
+                    Map<String, Object> jsonMap = (Map<String, Object>)JSON.deserializeUntyped(reinstateWorkerInInpayResponse);
+                    if (jsonMap.containsKey('result') && String.valueOf(jsonMap.get('result')).toLowerCase() == 'ok') {
+                    } else if (jsonMap.containsKey('result') && String.valueOf(jsonMap.get('result')).toLowerCase() == 'error' && jsonMap.containsKey('message')) {
+                        this.intimeSyncItemByRecordIdMap.get(recordId).ErrorMessage__c = String.valueOf(jsonMap.get('message'));
+                        this.errorMap.put(recordId, true);
+                    }
+                }
+                workerIds.add(workerId);
+            } 
+            if (Test.isRunningTest()) IntimeCalloutMock.systemName = 'Intime';
+        }
+    }*/
     
     /**
     *  @description Method to fetch timesheet record from intime
@@ -126,7 +155,7 @@ public without sharing class IntimeTimesheetSyncHandler extends IntimeSyncHandle
             Id recordId = (Id)record.get('Id');
             if (record != null && record.get(intimeObjectPayload.IntimeFieldReference__c) != null) {
                 List<String> recordValuesList = new List<String>{this.intimeToken,String.valueOf(record.get(intimeObjectPayload.IntimeFieldReference__c))};
-                this.intimeSyncItemByRecordIdMap.get(recordId).InTimeSyncLog__c = intimeObjectPayload.MethodName__c.replace('urn:','').capitalize()+' is \r\n\r\n'+String.format(intimeObjectPayload.Payload__c,recordValuesList);
+                this.intimeSyncItemByRecordIdMap.get(recordId).InTimeSyncLog__c = (!String.isBlank(this.intimeSyncItemByRecordIdMap.get(recordId).InTimeSyncLog__c) ? '\r\n\r\n' : '')+intimeObjectPayload.MethodName__c.replace('urn:','').capitalize()+' is \r\n\r\n'+String.format(intimeObjectPayload.Payload__c,recordValuesList);
                 // calling webserice 
                 HttpResponse httpResponse = IntimeWebservice.getRecord(intimeObjectPayload,recordValuesList);
                 this.intimeSyncItemByRecordIdMap.get(recordId).InTimeSyncLog__c += '\r\n\r\n'+intimeObjectPayload.MethodName__c.replace('urn:','').capitalize()+' Response is \r\n\r\n'+httpResponse.getBody();
@@ -282,111 +311,4 @@ public without sharing class IntimeTimesheetSyncHandler extends IntimeSyncHandle
         }
         update this.recordsList;
     }
-
-    /**
-    *  @description Method to create or update timesheet in intime
-    **/
-    private void createOrUpdateExpenseClaim(List<InTimeSyncItem__c> inTimeSyncItemsList, InTimeObject__mdt inTimeObject) {
-        IntimeObjectPayload__mdt intimeObjectPayload = IntimeSyncHelper.getInTimeObjectPayloadByType(inTimeObject,IntimeConstants.INTIME_OBJECT_PAYLOAD_TYPE_POST);
-        this.expenseRecordsList = getExpenseRecords(this.getRecordIds(inTimeSyncItemsList), inTimeObject);
-        HttpResponse httpResponse = null;
-        for (sObject expenseRecord : expenseRecordsList){
-            if (!Boolean.valueOf(expenseRecord.get(sirenum__Expense__c.SubmittedInIntime__c.getDescribe().getName()))) {
-                Boolean hasError = false;
-                this.context = expenseRecord.get(sirenum__Expense__c.InTimeId__c.getDescribe().getName()) != null ? IntimeConstants.INTIME_SYNC_CONTEXT_UPDATE : IntimeConstants.INTIME_SYNC_CONTEXT_INSERT;
-                Id timesheetId = (Id)expenseRecord.get(sirenum__Expense__c.sirenum__Timesheet__c.getDescribe().getName());
-                Boolean hasPayChargeSame = expenseRecord.get('ChargeExpenseValue__c') == expenseRecord.get('Expense_value__c');
-                List<Object> objectsList = new List<Object>();
-                if (hasPayChargeSame) {
-                    objectsList.add(new Map<String, String>{'name' => String.valueOf(expenseRecord.getSObject('sirenum__Expense_Type__r')?.get('Name')), 'value' => (expenseRecord.get('Expense_value__c') != null ? String.valueOf(expenseRecord.get('Expense_value__c')) : '0.00')});
-                } else {
-                    objectsList.add(new Map<String, String>{'name' => String.valueOf(expenseRecord.getSObject('sirenum__Expense_Type__r')?.get('Name'))+' PAY', 'value' => (expenseRecord.get('Expense_value__c') != null ? String.valueOf(expenseRecord.get('Expense_value__c')) : '0.00')});
-                    objectsList.add(new Map<String, String>{'name' => String.valueOf(expenseRecord.getSObject('sirenum__Expense_Type__r')?.get('Name'))+' CHARGE', 'value' => (expenseRecord.get('ChargeExpenseValue__c') != null ? String.valueOf(expenseRecord.get('ChargeExpenseValue__c')) : '0.00')});
-                }
-                for (Object expenseObject : objectsList) {
-                    intimeObjectPayload = IntimeSyncHelper.getInTimeObjectPayloadByType(inTimeObject,IntimeConstants.INTIME_OBJECT_PAYLOAD_TYPE_POST);
-                    Map<String, Object> expenseRecordObjectsMap = new Map<String, Object>();
-                    if (!this.errorMap.containsKey(timesheetId) || (this.errorMap.containsKey(timesheetId) && !this.errorMap.get(timesheetId))) {
-                        if (expenseRecord.getSObjects('ContentDocumentLinks') != null && expenseRecord.getSObjects('ContentDocumentLinks').size() > 0) {
-                            ContentDocumentLink contentDocumentLink = (ContentDocumentLink)expenseRecord.getSObjects('ContentDocumentLinks')[0];
-                            expenseRecordObjectsMap.put('claimFileBase64',EncodingUtil.base64Encode(contentDocumentLink.ContentDocument.LatestPublishedVersion.VersionData));
-                            expenseRecordObjectsMap.put('claimFileName',contentDocumentLink.ContentDocument.Title+'.'+contentDocumentLink.ContentDocument.LatestPublishedVersion.FileExtension);
-                        }
-                        expenseRecordObjectsMap.putAll(IntimeSyncHelper.createIntimeObject(inTimeObject, expenseRecord, this.context));
-                        Map<String, String> expenseObjectMap = (Map<String, String>)expenseObject;
-                        for (String expenseObjectMapKey : expenseObjectMap.keySet()) {
-                            if (expenseObjectMapKey == 'name') {
-                                if (expenseRecordObjectsMap.containsKey('description')) expenseRecordObjectsMap.put('description',expenseObjectMap.get(expenseObjectMapKey));
-                                if (expenseRecordObjectsMap.containsKey('expenseItems')) {
-                                    List<Object> expenseItems = (List<Object>)expenseRecordObjectsMap.get('expenseItems');
-                                    if (!expenseItems.isEmpty()) {
-                                        Map<String, Object> expenseItemMap = (Map<String, Object>)expenseItems[0];
-                                        if (expenseItemMap.containsKey('payElementCode')) expenseItemMap.put('payElementCode',expenseObjectMap.get(expenseObjectMapKey));
-                                        if (expenseItemMap.containsKey('type')) expenseItemMap.put('type',expenseObjectMap.get(expenseObjectMapKey));
-                                        if (expenseItemMap.containsKey('description')) expenseItemMap.put('description',expenseObjectMap.get(expenseObjectMapKey));
-                                    }
-                                }
-                            } else if (expenseObjectMapKey == 'value') {
-                                if (expenseRecordObjectsMap.containsKey('expenseItems')) {
-                                    List<Object> expenseItems = (List<Object>)expenseRecordObjectsMap.get('expenseItems');
-                                    if (!expenseItems.isEmpty()) {
-                                        Map<String, Object> expenseItemMap = (Map<String, Object>)expenseItems[0];
-                                        if (expenseItemMap.containsKey('grossValue')) expenseItemMap.put('grossValue',expenseObjectMap.get(expenseObjectMapKey));
-                                    }
-                                }
-                            }
-                        }
-                        XMLSerializer serializer = new XMLSerializer('ns');
-                        String xmlBody = serializer.JSONToXML(JSON.serialize(expenseRecordObjectsMap),true);
-                        List<String> recordValuesList = new List<String>{this.intimeToken,xmlBody};
-
-                        //Sync Log
-                        if (this.intimeSyncItemByRecordIdMap.containsKey(timesheetId)) this.intimeSyncItemByRecordIdMap.get(timesheetId).InTimeSyncLog__c += '\r\n\r\n'+intimeObjectPayload.MethodName__c.replace('urn:','').capitalize()+' is \r\n\r\n'+String.format(intimeObjectPayload.Payload__c,recordValuesList);
-                        httpResponse = IntimeWebservice.createOrUpdateRecord(intimeObjectPayload,recordValuesList);
-                        if (this.intimeSyncItemByRecordIdMap.containsKey(timesheetId)) this.intimeSyncItemByRecordIdMap.get(timesheetId).InTimeSyncLog__c += '\r\n\r\n'+intimeObjectPayload.MethodName__c.replace('urn:','').capitalize()+' Response is \r\n\r\n'+httpResponse.getBody();
-                        if (httpResponse.getStatusCode() == 200) {
-                            Object expenseClaimId = IntimeWebserviceParser.getCreateOrUpdateResponse(
-                                httpResponse.getBody(),
-                                intimeObjectPayload.ResponseElementName__c
-                            );
-                            expenseRecord.put(sirenum__Expense__c.InTimeId__c.getDescribe().getName(),expenseClaimId);
-                            expenseRecord.put(sirenum__Expense__c.LastIntimeSync__c.getDescribe().getName(),System.now());
-
-                            // SUBMIT EXPENSE
-                            if (expenseClaimId != null && !Boolean.valueOf(expenseRecord.get(sirenum__Expense__c.SubmittedInIntime__c.getDescribe().getName()))) {
-                                intimeObjectPayload = IntimeSyncHelper.getInTimeObjectPayloadByType(inTimeObject,IntimeConstants.INTIME_OBJECT_PAYLOAD_TYPE_SUBMIT);
-                                recordValuesList = new List<String>{this.intimeToken,String.valueOf(expenseClaimId)};
-                                if (this.intimeSyncItemByRecordIdMap.containsKey(timesheetId)) this.intimeSyncItemByRecordIdMap.get(timesheetId).InTimeSyncLog__c += '\r\n\r\n'+intimeObjectPayload.MethodName__c.replace('urn:','').capitalize()+' is \r\n\r\n'+String.format(intimeObjectPayload.Payload__c,recordValuesList);
-                                httpResponse = IntimeWebservice.createOrUpdateRecord(intimeObjectPayload,recordValuesList);
-                                if (this.intimeSyncItemByRecordIdMap.containsKey(timesheetId)) this.intimeSyncItemByRecordIdMap.get(timesheetId).InTimeSyncLog__c += '\r\n\r\n'+intimeObjectPayload.MethodName__c.replace('urn:','').capitalize()+' Response is \r\n\r\n'+httpResponse.getBody();
-                            }
-                        } else {
-                            hasError = true;
-                            this.intimeSyncItemByRecordIdMap.get(timesheetId).ErrorMessage__c +=  IntimeSyncHelper.getErrorMessage(httpResponse.getBody());
-                            this.intimeSyncItemByRecordIdMap.get(timesheetId).InTimeSyncLog__c += '\r\n\r\n'+'Error is '+'\r\n\r\n'+IntimeSyncHelper.getErrorMessage(httpResponse.getBody());
-                            this.errorMap.put(timesheetId,true);
-                        }
-                    }
-                }
-                if (!hasError) expenseRecord.put(sirenum__Expense__c.SubmittedInIntime__c.getDescribe().getName(),true);
-            }
-        }
-        update expenseRecordsList;
-    }
-
-    /**
-    *  @description Method to get sobject record
-    **/
-    public List<sObject> getExpenseRecords(Set<Id> recordIds, InTimeObject__mdt inTimeObject) {
-        String contentDocumentQuery = ',(SELECT Id, ContentDocumentId, ContentDocument.Title, ContentDocument.LatestPublishedVersionId, ContentDocument.LatestPublishedVersion.VersionData, ContentDocument.LatestPublishedVersion.FileExtension FROM ContentDocumentLinks ORDER BY ContentDocument.CreatedDate DESC LIMIT 1)';
-        Set<String> fieldsList = getFieldsList(inTimeObject);
-        fieldsList.add(sirenum__Expense__c.sirenum__Timesheet__c.getDescribe().getName());
-        fieldsList.add(sirenum__Expense__c.SubmittedInIntime__c.getDescribe().getName());
-        fieldsList.add(sirenum__Expense__c.sirenum__Expense_Type__c.getDescribe().getName().replace('__c','__r')+'.Name');
-        fieldsList.add(sirenum__Expense__c.ChargeExpenseValue__c.getDescribe().getName());
-        fieldsList.add(sirenum__Expense__c.Expense_value__c.getDescribe().getName());
-        String soqlQuery = 'SELECT '+String.join(new List<String>(fieldsList),',')+contentDocumentQuery+' FROM '+sirenum__Expense__c.sObjectType.getDescribe().getName()+' WHERE '+sirenum__Expense__c.sirenum__Timesheet__c.getDescribe().getName()+' IN: recordIds';
-        return (List<sObject>)Database.query(soqlQuery);
-    }
-    
 }

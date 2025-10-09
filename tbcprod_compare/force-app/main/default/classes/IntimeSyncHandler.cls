@@ -41,7 +41,7 @@ public virtual without sharing class IntimeSyncHandler {
     public virtual void getRecords(Set<Id> recordIds, InTimeObject__mdt inTimeObject) {
         Set<String> fieldsList = getFieldsList(inTimeObject);
         fieldsList.addAll(getAdditionalFields());
-        String soqlQuery = 'SELECT '+String.join(new List<String>(fieldsList),',')+' FROM '+new List<Id>(recordIds)[0].getSObjectType().getDescribe().getName()+' WHERE Id IN: recordIds';
+        String soqlQuery = 'SELECT '+String.join(new List<String>(fieldsList),',')+' FROM '+new List<Id>(recordIds)[0].getSObjectType().getDescribe().getName()+' WHERE Id IN: recordIds FOR UPDATE';
         List<sObject> recordsList = (List<sObject>)Database.query(soqlQuery);
         this.recordsList = !recordsList.isEmpty() ? recordsList : new List<sObject>();
     }

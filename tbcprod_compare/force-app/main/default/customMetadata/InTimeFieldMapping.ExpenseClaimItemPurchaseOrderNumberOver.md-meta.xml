@@ -12,7 +12,7 @@
     </values>
     <values>
         <field>InTimeField__c</field>
-        <value xsi:type="xsd:string">purchaseOrderNumberOverride</value>
+        <value xsi:type="xsd:string">purchaseOrderNumOverride</value>
     </values>
     <values>
         <field>InTimeObject__c</field>

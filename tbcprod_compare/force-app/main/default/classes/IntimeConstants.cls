@@ -26,9 +26,11 @@ public with sharing class IntimeConstants {
 
     public static final String HTTP_METHOD_POST = 'POST';
     public static final String HTTP_METHOD_GET = 'GET';
+    public static final String HTTP_METHOD_PUT = 'PUT';
     public static final String INTIME_OBJECT_PAYLOAD_TYPE_FETCH = 'Fetch';
     public static final String INTIME_OBJECT_PAYLOAD_TYPE_POST = 'Post';
     public static final String INTIME_OBJECT_PAYLOAD_TYPE_SUBMIT = 'Submit';
+    public static final String INTIME_OBJECT_PAYLOAD_TYPE_UPDATE = 'Update';
     public static final String INTIME_OBJECT_PAYLOAD_TYPE_REINSTATE = 'Reinstate';
     public static final String INTIME_OBJECT_PAYLOAD_TYPE_GROUP_CODE_SUBMIT = 'Group Code Submit';
     public static final String INTIME_OBJECT_PAYLOAD_TYPE_CUSTOMER_CODE_SUBMIT = 'Customer Code Submit';
@@ -54,6 +56,8 @@ public with sharing class IntimeConstants {
     public static final String SALESFORCE_TO_INTIME_WORKER = 'Salesforce To Intime Worker';
     public static final String SALESFORCE_TO_INTIME_PLACEMENT = 'Salesforce To Intime Placement';
     public static final String SALESFORCE_TO_INTIME_TIMESHEET = 'Salesforce To Intime Timesheet';
+    public static final String SALESFORCE_TO_INTIME_EXPENSE = 'Salesforce To Intime Expense';
+    public static final String SALESFORCE_TO_INTIME_EXPENSE_UPDATE = 'Salesforce To Intime Expense Update';
     public static final String SALESFORCE_TO_INTIME_TIMESHEET_REVERT = 'Salesforce To Intime Timesheet Revert';
     public static final String SALESFORCE_TO_INTIME_EXPENSE_REVERT = 'Salesforce To Intime Expense Revert';
     public static final String SALESFORCE_TO_INTIME_TIMESHEET_FILE = 'Salesforce To Intime Timesheet File';

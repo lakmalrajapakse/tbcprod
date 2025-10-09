@@ -236,7 +236,7 @@ public with sharing class SIM_TimeApproval {
         strSOQL += 'sirenum__Actual_Start_Time__c, sirenum__Actual_End_Time__c, sirenum__Billable_Start_Time__c, sirenum__Billable_End_Time__c, sirenum__Scheduled_Shift_Length_Decimal__c, ';
         strSOQL += 'sirenum__Absolute_Start_Time__c, sirenum__Absolute_End_Time__c, RecordTypeId, sirenum__Billable_Shift_Length_Decimal__c, sirenum__Absolute_Shift_Length__c,';
         strSOQL += 'sirenum__Billable_Local_Start_Date__c,sirenum__Billable_Local_Start_Time__c,sirenum__Billable_Local_End_Date__c,	sirenum__Billable_Local_End_Time__c,sirenum__Scheduled_Start_Time__c,';
-        strSOQL += 'sirenum__Scheduled_End_Time__c, sirenum__Timesheet_summaries__c, ';
+        strSOQL += 'sirenum__Scheduled_End_Time__c, sirenum__Timesheet_summaries__c, sirenum__Employee_Name__c, Employee_Number__c, ';
         strSOQL += '(SELECT Id, Name, sirenum__Total_Pay__c, sirenum__Total_Charge__c, sirenum__Shift__c, sirenum__Timesheet__c, sirenum__Timesheet__r.sirenum__Total_Pay__c, sirenum__Timesheet__r.sirenum__Total_Charge__c,sirenum__Date__c, sirenum__Hours__c FROM sirenum__Timesheet_Lines__r),';
         strSOQL += 'sirenum__Timesheet_summaries__r.sirenum__Total_Charge__c, sirenum__Timesheet_summaries__r.sirenum__Total_Pay__c, sirenum__Timesheet_summaries__r.Name, sirenum__Timesheet_summaries__r.sirenum__PO_Number__c, sirenum__Timesheet_summaries__r.sirenum__Worker__r.Name,';
         strSOQL += 'sirenum__Timesheet_summaries__r.sirenum__Week_Ending__c,sirenum__Timesheet_summaries__r.sirenum__Total_Hours__c,sirenum__Timesheet_summaries__r.sirenum__Worker__r.InTimeExternalId__c, sirenum__Timesheet_summaries__r.sirenum__Team__r.Name, ';
@@ -298,7 +298,7 @@ public with sharing class SIM_TimeApproval {
         // NOTE uncomment Test.isRunningTest() Ternary and comment out the line for Is_Test_Shift__c = true
         strSOQL += Test.isRunningTest() ? '' : 'AND sirenum__Published__c = true ';
         //strSOQL += 'And (sirenum__Published__c = true OR Is_Test_Shift__c = true)';
-        strSOQL += 'AND sirenum__Contact__r.Name != null ';
+        strSOQL += 'AND sirenum__Contact__c != null ';
         system.debug('SPC ' + strSOQL);
 
         System.debug(LOGGINGLEVEL.ERROR, soqlFilter);

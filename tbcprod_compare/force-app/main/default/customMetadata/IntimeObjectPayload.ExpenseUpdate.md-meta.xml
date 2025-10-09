@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Expense Update</label>
+    <protected>false</protected>
+    <values>
+        <field>InTimeObject__c</field>
+        <value xsi:type="xsd:string">ExpenseClaimItemUpdate</value>
+    </values>
+    <values>
+        <field>IntimeFieldReference__c</field>
+        <value xsi:type="xsd:string">InTimeId__c</value>
+    </values>
+    <values>
+        <field>MethodName__c</field>
+        <value xsi:type="xsd:string">urn:updateExpenseRefs</value>
+    </values>
+    <values>
+        <field>Payload__c</field>
+        <value xsi:type="xsd:string">&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+    &lt;soap:Body&gt;
+        &lt;ns:updateExpenseRefs xmlns:ns=&quot;http://v3_15.webservices.intime.ipfour.com/xsd&quot;&gt;
+            &lt;ns:token&gt;{0}&lt;/ns:token&gt;
+            &lt;ns:expenseItem&gt;{1}&lt;/ns:expenseItem&gt;
+        &lt;/ns:updateExpenseRefs&gt;
+    &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</value>
+    </values>
+    <values>
+        <field>ResponseElementName__c</field>
+        <value xsi:type="xsd:string">updateExpenseRefsResponse</value>
+    </values>
+    <values>
+        <field>Type__c</field>
+        <value xsi:type="xsd:string">Update</value>
+    </values>
+</CustomMetadata>

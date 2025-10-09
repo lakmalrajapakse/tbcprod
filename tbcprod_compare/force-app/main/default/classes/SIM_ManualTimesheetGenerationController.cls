@@ -47,7 +47,7 @@ public with sharing class SIM_ManualTimesheetGenerationController {
             FIND :searchTerm
             IN ALL FIELDS
             RETURNING
-                sirenum__Week__c(Id, Name, sirenum__Start_Date__c WHERE sirenum__PayrollCycle__c in :selectedIds)               
+                sirenum__Week__c(Id, Name, sirenum__Start_Date__c WHERE sirenum__PayrollCycle__c in :selectedIds and is_Locked__c = false)
             LIMIT :MAX_RESULTS
         ];
 

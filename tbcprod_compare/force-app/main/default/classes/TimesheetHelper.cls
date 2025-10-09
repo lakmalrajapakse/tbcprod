@@ -34,6 +34,19 @@ public without sharing class TimesheetHelper {
     **/
     public static void manageTimesheets(List<sirenum__Timesheet__c> timesheetsList, Map<Id, sirenum__Timesheet__c> timesheetsMap) {
         List<InTimeSyncItem__c> intimeSyncItemsToCreate = new List<InTimeSyncItem__c>();
+        Map<Id, sirenum__Timesheet__c> timesheetRecordsMap = new Map<Id, sirenum__Timesheet__c>();
+        Set<Id> timesheetIds = new Set<Id>();
+        for (sirenum__Timesheet__c timesheet : timesheetsList) {
+            if ((timesheet.Status__c == IntimeConstants.TIMESHEET_STATUS_APPROVED 
+                || timesheet.Status__c == IntimeConstants.TIMESHEET_STATUS_EXPORTED)
+                && (timesheet.Status__c != timesheetsMap.get(timesheet.Id).Status__c
+                || timesheet.sirenum__PO_Number__c != timesheetsMap.get(timesheet.Id).sirenum__PO_Number__c)) {
+                timesheetIds.add(timesheet.Id);
+            }
+        }
+        if (!timesheetIds.isEmpty()) {
+            timesheetRecordsMap = new Map<Id, sirenum__Timesheet__c>([SELECT Id, (SELECT Id, IntimeId__c FROM sirenum__Expenses__r) FROM sirenum__Timesheet__c WHERE Id IN: timesheetIds]);
+        }
         for (sirenum__Timesheet__c timesheet : timesheetsList) {
             if ((timesheet.Status__c == IntimeConstants.TIMESHEET_STATUS_APPROVED 
                 || timesheet.Status__c == IntimeConstants.TIMESHEET_STATUS_EXPORTED)
@@ -44,6 +57,16 @@ public without sharing class TimesheetHelper {
                     Status__c = IntimeConstants.INTIME_SYNC_ITEM_STATUS_INITIATED,
                     Type__c = IntimeConstants.SALESFORCE_TO_INTIME_TIMESHEET
                 ));
+
+                if (timesheetRecordsMap.containsKey(timesheet.Id) && !timesheetRecordsMap.get(timesheet.Id).sirenum__Expenses__r.isEmpty()) {
+                    for (sirenum__Expense__c expense : timesheetRecordsMap.get(timesheet.Id).sirenum__Expenses__r) {
+                        intimeSyncItemsToCreate.add(new InTimeSyncItem__c(
+                            Expense__c = expense.Id,
+                            Status__c = IntimeConstants.INTIME_SYNC_ITEM_STATUS_INITIATED,
+                            Type__c = !String.isBlank(expense.IntimeId__c) ? IntimeConstants.SALESFORCE_TO_INTIME_EXPENSE_UPDATE : IntimeConstants.SALESFORCE_TO_INTIME_EXPENSE
+                        ));
+                    }
+                }
             }
         }
         if (!intimeSyncItemsToCreate.isEmpty()) {
@@ -87,8 +110,15 @@ public without sharing class TimesheetHelper {
             } 
         }
         
+        Set<Id> periodIds = new Set<Id>();
         for (sirenum__Timesheet__c timesheet : timesheetsList) {
-            if (!String.isBlank(timesheet.InTimeId__c) && !String.isBlank(timesheetsMap.get(timesheet.Id).InTimeId__c)) {
+            if (timesheet.sirenum__Week__c != null) periodIds.add(timesheet.sirenum__Week__c);            
+        }
+
+        Map<Id, sirenum__Week__c> lockedPeriods = new Map<Id, sirenum__Week__c>([SELECT Id, Is_Locked__c FROM sirenum__Week__c WHERE Id IN :periodIds and Is_Locked__c = true]);
+
+        for (sirenum__Timesheet__c timesheet : timesheetsList) {
+            if ((!String.isBlank(timesheet.InTimeId__c) && !String.isBlank(timesheetsMap.get(timesheet.Id).InTimeId__c)) || lockedPeriods.containsKey(timesheet.sirenum__Week__c)) {
                 for (String fieldName : tsFields) {                    
                     if (timesheet.get(fieldName) != timesheetsMap.get(timesheet.Id).get(fieldName)) {
                         modifiedFieldsList.add(fieldName);
@@ -101,7 +131,11 @@ public without sharing class TimesheetHelper {
 
                 modifiedFieldsList.removeAll(fieldsAllowedToModifyList);
                 System.debug(modifiedFieldsList);
-                if (!modifiedFieldsList.isEmpty()) timesheet.addError('You cannot modify a timesheet that is synced with InTime [' + String.join(modifiedFieldsList, ',') + ']');
+                if (!modifiedFieldsList.isEmpty() && (!String.isBlank(timesheet.InTimeId__c) && !String.isBlank(timesheetsMap.get(timesheet.Id).InTimeId__c))) {
+                    timesheet.addError('You cannot modify a timesheet that is synced with InTime [' + String.join(modifiedFieldsList, ',') + ']');
+                    return;
+                }
+                if (!modifiedFieldsList.isEmpty()) timesheet.addError('You cannot modify a timesheet that is associated with a locked period [' + String.join(modifiedFieldsList, ',') + ']');
             }
         }
     } 

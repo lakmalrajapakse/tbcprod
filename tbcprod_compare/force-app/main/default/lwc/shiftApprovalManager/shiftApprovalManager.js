@@ -313,7 +313,7 @@ export default class ShiftApprovalManager extends NavigationMixin(LightningEleme
                             [
                                 record.shiftName,
                                 record.Id,
-                                record.workerName,
+                                '"' + record.workerName + '"',
                                 record.shift.sirenum__Contact__r?.InTimeExternalId__c,
                                 record.shift.sirenum__Contact__r?.Client_Reference_Number__c,
                                 record.shift.sirenum__Team__r?.sirenum__Account__r?.sirenum__Client__r?.Client_Code__c,
@@ -411,7 +411,7 @@ export default class ShiftApprovalManager extends NavigationMixin(LightningEleme
             return [
                 record.shiftName,
                 record.Id,
-                record.workerName,
+                '"' + record.workerName + '"',
                 record.shift.sirenum__Contact__r?.InTimeExternalId__c,
                 record.shift.sirenum__Contact__r?.Client_Reference_Number__c,
                 record.shift.sirenum__Team__r?.sirenum__Account__r?.sirenum__Client__r?.Client_Code__c,

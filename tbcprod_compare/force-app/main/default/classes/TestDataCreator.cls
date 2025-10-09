@@ -394,11 +394,13 @@ public with sharing class TestDataCreator {
     **/
     public static List<sirenum__Employee_Request__c> createEmployeeRequests(Integer noOfEmployeeRequests, Id contactId){
         List<sirenum__Employee_Request__c> employeeRequestsList = new List<sirenum__Employee_Request__c>();
+        Date employeeRequestDate = System.today();
         for (Integer i=0;i<noOfEmployeeRequests;i++) {
+            employeeRequestDate = employeeRequestDate.addDays(i);
             employeeRequestsList.add(new sirenum__Employee_Request__c(
                 sirenum__Contact__c = contactId,
-                sirenum__Start_Time__c = DateTime.newInstance(System.today(),Time.newInstance(9,0,0,0)),
-                sirenum__End_Time__c = DateTime.newInstance(System.today(),Time.newInstance(17,0,0,0)),
+                sirenum__Start_Time__c = DateTime.newInstance(employeeRequestDate,Time.newInstance(9,0,0,0)),
+                sirenum__End_Time__c = DateTime.newInstance(employeeRequestDate,Time.newInstance(17,0,0,0)),
                 sirenum__Type__c = IntimeConstants.EMPLOYEE_REQUEST_TYPE_HOLIDAY,
                 sirenum__Approved__c = true
             ));

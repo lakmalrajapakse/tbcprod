@@ -37,7 +37,7 @@ public without sharing class IntimeWebservice {
     public static HttpResponse getModifiedItemsWithRefCodeByType(List<String> recordValuesList) {
         String payload = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">'+
                             '<soap:Body>'+
-                                '<ns:getModifiedItemsWithRefCodeByType xmlns:ns="http://v3_12.webservices.intime.ipfour.com/xsd">'+
+                                '<ns:getModifiedItemsWithRefCodeByType xmlns:ns="http://v3_15.webservices.intime.ipfour.com/xsd">'+
                                     '<ns:token>{0}</ns:token>'+
                                     '<ns:since>{1}</ns:since>'+
                                     '<ns:types>{2}</ns:types>'+
@@ -60,7 +60,7 @@ public without sharing class IntimeWebservice {
     public static HttpResponse getModifiedItemsInRangeWithRefCodeByType(List<String> recordValuesList) {
         String payload = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">'+
                             '<soap:Body>'+
-                                '<ns:getModifiedItemsInRangeWithRefCodeByType xmlns:ns="http://v3_12.webservices.intime.ipfour.com/xsd">'+
+                                '<ns:getModifiedItemsInRangeWithRefCodeByType xmlns:ns="http://v3_15.webservices.intime.ipfour.com/xsd">'+
                                     '<ns:token>{0}</ns:token>'+
                                     '<ns:since>{1}</ns:since>'+
                                     '<ns:until>{2}</ns:until>'+
@@ -84,7 +84,7 @@ public without sharing class IntimeWebservice {
     public static HttpResponse getContractorPayslip(String intimeWorkerId) {
         String payload = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">'+
                             '<soap:Body>'+
-                                '<ns:getURLForContractorsPayslip xmlns:ns="http://v3_12.webservices.intime.ipfour.com/xsd">'+
+                                '<ns:getURLForContractorsPayslip xmlns:ns="http://v3_15.webservices.intime.ipfour.com/xsd">'+
                                     '<ns:token>'+IntimeSyncHelper.getToken()+'</ns:token>'+
                                     '<ns:userId>'+intimeWorkerId+'</ns:userId>'+
                                     '<ns:daily>false</ns:daily>'+

@@ -468,21 +468,22 @@
                                                         </template>
                                                     </td>
 
-                                                    <th scope="row">
-                                                        <div title={record.shift.Name}>
-                                                            <a data-record={record.Id} data-object="sirenum__Shift__c"
-                                                                onclick={handleNavigateClick}>{record.shift.Name}</a>
-                                                        </div>
-                                                        <div if:true={record.shift.sirenum__Site__c}
-                                                            class="slds-truncate"
-                                                            title={record.shift.sirenum__Site__r.Name}
-                                                            style="width: 5rem">
-                                                            <a data-record={record.shift.sirenum__Site__c}
-                                                                data-object="sirenum__Site__c"
-                                                                onclick={handleNavigateClick}>{record.shift.sirenum__Site__r.Name}</a>
-                                                        </div>
-                                                        <div if:false={record.shift.sirenum__Site__c}>
-                                                            No {SHIFT_DESC.fields.sirenum__Site__c.label}
+                                                    <td scope="row">
+                                                        <div class="slds-truncate">
+                                                            <div title={record.shift.Name}>
+                                                                <a data-record={record.Id} data-object="sirenum__Shift__c"
+                                                                    onclick={handleNavigateClick}>{record.shift.Name}</a>
+                                                            </div>
+                                                            <div if:true={record.siteName}                                                            
+                                                                title={record.siteName}
+                                                                style="width: 5rem">
+                                                                <a data-record={record.shift.sirenum__Site__c}
+                                                                    data-object="sirenum__Site__c"
+                                                                    onclick={handleNavigateClick}>{record.siteName}</a>
+                                                            </div>
+                                                            <div if:false={record.siteName}>
+                                                                No {SHIFT_DESC.fields.sirenum__Site__c.label}
+                                                            </div>
                                                         </div>
                                                         <!-- <div>
                                           <span>{record.shift.sirenum__AdHoc__c}</span>
@@ -491,7 +492,7 @@
                                                             <span
                                                                 class="slds-text-color_error">{record.shift.sirenum__AdHoc__c}</span>
                                                         </div>
-                                                    </th>
+                                                    </td>
                                                     <td>
                                                         <div class="slds-truncate" title={record.accountName}>
                                                             <a data-record={record.account} data-object="Account"
@@ -499,34 +500,33 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <!-- Contact -->
-                                                        <div if:true={record.shift.sirenum__Contact__c}
-                                                            class="slds-truncate"
-                                                            title={record.shift.sirenum__Contact__r.Name}
-                                                            style="min-width: 5rem; max-width: 7rem">
-                                                            <a data-record={record.shift.sirenum__Contact__c}
-                                                                data-object="Contact"
-                                                                onclick={handleNavigateClick}>{record.shift.sirenum__Contact__r.Name}</a>
-                                                        </div>
-                                                        <div if:true={record.shift.sirenum__Contact__c}
-                                                            class="slds-truncate"
-                                                            title={record.shift.sirenum__Contact__r.Name}
-                                                            style="min-width: 5rem; max-width: 7rem">
-                                                            {record.shift.sirenum__Contact__r.InTimeExternalId__c}
-                                                        </div>
-                                                        <div if:false={record.shift.sirenum__Contact__c}>
-                                                            No {SHIFT_DESC.fields.sirenum__Contact__c.label}
-                                                        </div>
-                                                        <div if:true={record.shift.sirenum__Team__c}
-                                                            class="slds-truncate"
-                                                            title={record.shift.sirenum__Team__r.Name}
-                                                            style="width: 7rem">
-                                                            <a data-record={record.shift.sirenum__Team__c}
-                                                                data-object="sirenum__Team__c"
-                                                                onclick={handleNavigateClick}>{record.shift.sirenum__Team__r.Name}</a>
-                                                        </div>
-                                                        <div if:false={record.shift.sirenum__Team__c}>
-                                                            No {SHIFT_DESC.fields.sirenum__Team__c.label}
+                                                        <!-- Contact -->                                                        
+                                                        <div class="slds-truncate">
+                                                            <div if:true={record.shift.sirenum__Contact__c}                                                            
+                                                                title={record.shift.sirenum__Employee_Name__c}
+                                                                style="min-width: 5rem; max-width: 7rem">
+                                                                <a data-record={record.shift.sirenum__Contact__c}
+                                                                    data-object="Contact"
+                                                                    onclick={handleNavigateClick}>{record.shift.sirenum__Employee_Name__c}</a>
+                                                            </div>
+                                                            <div if:true={record.shift.sirenum__Contact__c}                                                            
+                                                                title={record.shift.sirenum__Employee_Name__c}
+                                                                style="min-width: 5rem; max-width: 7rem">
+                                                                {record.shift.Employee_Number__c}
+                                                            </div>
+                                                            <div if:false={record.shift.sirenum__Contact__c}>
+                                                                No {SHIFT_DESC.fields.sirenum__Contact__c.label}
+                                                            </div>
+                                                            <div if:true={record.jobRoleName}                                                            
+                                                                title={record.jobRoleName}
+                                                                style="width: 7rem">
+                                                                <a data-record={record.shift.sirenum__Team__c}
+                                                                    data-object="sirenum__Team__c"
+                                                                    onclick={handleNavigateClick}>{record.jobRoleName}</a>
+                                                            </div>
+                                                            <div if:false={record.jobRoleName}>
+                                                                No {SHIFT_DESC.fields.sirenum__Team__c.label}
+                                                            </div>
                                                         </div>
                                                         <!-- Asignee Number -->
                                                         <!-- <div if:false={record.shift.sirenum__Contact__c}>
@@ -568,7 +568,7 @@
                                                                     <a data-shift={expense.Shift}
                                                                         data-expense={expense.Id}
                                                                         data-date={record.shiftDate}
-                                                                        data-contact={record.shift.sirenum__Contact__r.Id}
+                                                                        data-contact={record.shift.sirenum__Contact__c}
                                                                         onclick={handleEditExpense}>
                                                                         <span
                                                                             style="display: block">{expense.ExepnseTypeName}</span>
@@ -583,7 +583,7 @@
                                                                 <a data-shift={record.Id} data-date={record.shiftDate}
                                                                     data-start-time={record.shift.sirenum__Scheduled_Start_Time__c}
                                                                     data-end-time={record.shift.sirenum__Scheduled_End_Time__c}
-                                                                    data-contact={record.shift.sirenum__Contact__r.Id}
+                                                                    data-contact={record.shift.sirenum__Contact__c}
                                                                     onclick={handleAddExpense}>
                                                                     Add
                                                                 </a>
@@ -592,7 +592,7 @@
                                                     </td>
                                                     <!---Scheduled times-->
                                                     <td>
-                                                        <div style="width: 5rem; max-width: 7rem">
+                                                        <div>
                                                             <c-input-shift-times data-id={record.shift.Id}
                                                                 start-time-template={record.shift.sirenum__Scheduled_Start_Time__c}
                                                                 end-time-template={record.shift.sirenum__Scheduled_End_Time__c}
@@ -869,12 +869,12 @@
                                 </table>
                             </template>
                         </lightning-tab>
-                        <lightning-tab label="Timesheets">
+                        <lightning-tab label="Timesheets" if:false={_isCommunity}>
                             <c-shift-management-timesheets filters={appliedFilters} is-community={_isCommunity}
                                 parent-loading={isLoading} ontimesheetdeleted={handleTimesheetDeleted}
                                 ontimesheetupdated={handleTimesheetUpdated}></c-shift-management-timesheets>
                         </lightning-tab>
-                        <lightning-tab label="Adjustments">
+                        <lightning-tab label="Adjustments" if:false={_isCommunity}>
                             <c-shift-management-adjustments filters={appliedFilters}
                                 parent-loading={isLoading}></c-shift-management-adjustments>
                         </lightning-tab>

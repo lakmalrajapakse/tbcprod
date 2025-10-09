@@ -489,4 +489,134 @@ public with sharing class IntimeSyncBatchTest {
         Test.stopTest();
         Assert.areEqual(1,[SELECT COUNT() FROM sirenum__LogEntry__c]);
     }
+
+    /**
+    *   @description : Test IntimeSyncBatchForExpense
+    **/
+    @isTest
+    static void test_IntimeSyncBatchForExpense(){
+        Test.startTest();
+        Test.setMock(HttpCalloutMock.class, new IntimeCalloutMock());
+        List<sirenum__Expense__c> expensesList = [SELECT Id, InTimeId__c, InTimeSyncStatus__c, LastIntimeSync__c FROM sirenum__Expense__c LIMIT 1];
+        Assert.areEqual(null, expensesList[0].InTimeId__c);
+        Assert.areEqual('Not Synced', expensesList[0].InTimeSyncStatus__c);
+        // create intime sync item
+        List<InTimeSyncItem__c> intimeSyncItemsList = TestDataCreator.createIntimeSyncItems(
+            null,
+            null,
+            null,
+            null,
+            null,
+            expensesList[0].Id
+        );
+        intimeSyncItemsList[0].Type__c = IntimeConstants.SALESFORCE_TO_INTIME_EXPENSE;
+        insert intimeSyncItemsList;
+        IntimeSyncProcessor.startIntimeSyncBatch(IntimeConstants.INTIME_OBJECT_SOURCE_SALESFORCE);
+        Test.stopTest();
+        expensesList = [SELECT Id, InTimeId__c, InTimeSyncStatus__c, LastIntimeSync__c FROM sirenum__Expense__c LIMIT 1];
+        Assert.areEqual('2732', expensesList[0].InTimeId__c);
+        Assert.areEqual('Synced', expensesList[0].InTimeSyncStatus__c);
+    }
+
+    /**
+    *   @description : Test IntimeSyncBatchForExpense
+    **/
+    @isTest
+    static void test_IntimeSyncBatchForExpenseWithIntimeId(){
+        Test.startTest();
+        Test.setMock(HttpCalloutMock.class, new IntimeCalloutMock());
+        List<sirenum__Expense__c> expensesList = [SELECT Id, InTimeId__c, InTimeSyncStatus__c, LastIntimeSync__c, SubmittedInIntime__c FROM sirenum__Expense__c LIMIT 1];
+        expensesList[0].InTimeId__c = '2732';
+        expensesList[0].SubmittedInIntime__c = true;
+        update expensesList;
+        // create intime sync item
+        List<InTimeSyncItem__c> intimeSyncItemsList = TestDataCreator.createIntimeSyncItems(
+            null,
+            null,
+            null,
+            null,
+            null,
+            expensesList[0].Id
+        );
+        intimeSyncItemsList[0].Type__c = IntimeConstants.SALESFORCE_TO_INTIME_EXPENSE_UPDATE;
+        insert intimeSyncItemsList;
+        IntimeSyncProcessor.startIntimeSyncBatch(IntimeConstants.INTIME_OBJECT_SOURCE_SALESFORCE);
+        Test.stopTest();
+        expensesList = [SELECT Id, InTimeId__c, InTimeSyncStatus__c, LastIntimeSync__c FROM sirenum__Expense__c LIMIT 1];
+        Assert.areEqual('2732', expensesList[0].InTimeId__c);
+        Assert.areEqual('Synced', expensesList[0].InTimeSyncStatus__c);
+    }
+
+    /**
+    *   @description : Test IntimeSyncBatchForTimesheet
+    **/
+    @isTest
+    static void test_IntimeSyncBatchForTimesheetWithReinstateEmployeeInInpay(){
+        Test.startTest();
+        Test.setMock(HttpCalloutMock.class, new IntimeCalloutMock());
+        List<Contact> contactsList = [SELECT Id, InTimeId__c, InPayReference__c, LeaverInformationUpdatedInInTime__c FROM Contact LIMIT 1];
+        contactsList[0].InPayReference__c = '1234';
+        contactsList[0].LeaverInformationUpdatedInInTime__c = true;
+        update contactsList;
+        List<sirenum__Timesheet__c> timesheetsList = [SELECT Id, InTimeId__c, InTimeSyncStatus__c, LastIntimeSync__c FROM sirenum__Timesheet__c LIMIT 1];
+        Assert.areEqual(null, timesheetsList[0].InTimeId__c);
+        Assert.areEqual('Not Synced', timesheetsList[0].InTimeSyncStatus__c);
+        Assert.areEqual(null, timesheetsList[0].LastIntimeSync__c);
+        timesheetsList[0].InTimeId__c = '1210910';
+        update timesheetsList;
+
+        // create intime sync item
+        List<InTimeSyncItem__c> intimeSyncItemsList = TestDataCreator.createIntimeSyncItems(
+            null,
+            null,
+            null,
+            timesheetsList[0].Id,
+            null,
+            null
+        );
+        intimeSyncItemsList[0].Type__c = IntimeConstants.SALESFORCE_TO_INTIME_TIMESHEET;
+        insert intimeSyncItemsList;
+        IntimeSyncProcessor.startIntimeSyncBatch(IntimeConstants.INTIME_OBJECT_SOURCE_SALESFORCE);
+        Test.stopTest();
+        timesheetsList = [SELECT Id, InTimeId__c, InTimeSyncStatus__c, LastIntimeSync__c FROM sirenum__Timesheet__c LIMIT 1];
+        Assert.areEqual('1210910', timesheetsList[0].InTimeId__c);
+        Assert.areEqual('Synced', timesheetsList[0].InTimeSyncStatus__c);
+    }
+
+    /**
+    *   @description : Test IntimeSyncBatchForCEmployee Request
+    **/
+    /*LR-TEMP @isTest
+    static void test_IntimeSyncBatchForEmployeeRequestWithReinstateEmployeeInInpay(){
+        Test.startTest();
+        Test.setMock(HttpCalloutMock.class, new IntimeCalloutMock());
+        List<Contact> contactsList = [SELECT Id, InTimeId__c, InTimeExternalId__c, InTimeSyncStatus__c, LastIntimeSync__c, LeaverInformationUpdatedInInTime__c, InPayReference__c FROM Contact LIMIT 1];
+        contactsList[0].InTimeId__c = '12124';
+        contactsList[0].InPayReference__c = '1234';
+        contactsList[0].LeaverInformationUpdatedInInTime__c = true;
+        update contactsList;
+        List<sirenum__Employee_Request__c> employeeRequestsList = [SELECT Id, InTimeId__c, InTimeSyncStatus__c, LastIntimeSync__c FROM sirenum__Employee_Request__c LIMIT 1];
+        Assert.areEqual(null, employeeRequestsList[0].InTimeId__c);
+        Assert.areEqual('Not Synced', employeeRequestsList[0].InTimeSyncStatus__c);
+        Assert.areEqual(null, employeeRequestsList[0].LastIntimeSync__c);
+
+        // create intime sync item
+        List<InTimeSyncItem__c> intimeSyncItemsList = TestDataCreator.createIntimeSyncItems(
+            null,
+            null,
+            null,
+            null,
+            employeeRequestsList[0].Id,
+            null
+        );
+        intimeSyncItemsList[0].Type__c = IntimeConstants.SALESFORCE_TO_INTIME_EMPLOYEE_REQUEST;
+        insert intimeSyncItemsList;
+        IntimeSyncProcessor.startIntimeSyncBatch(IntimeConstants.INTIME_OBJECT_SOURCE_SALESFORCE);
+        Test.stopTest();
+        employeeRequestsList = [SELECT Id, InTimeId__c, InTimeSyncStatus__c, LastIntimeSync__c FROM sirenum__Employee_Request__c LIMIT 1];
+        Assert.areEqual('57263', employeeRequestsList[0].InTimeId__c);
+        Assert.areEqual('Synced', employeeRequestsList[0].InTimeSyncStatus__c);
+        Assert.areNotEqual(null, employeeRequestsList[0].LastIntimeSync__c);
+    }*/
+
 }

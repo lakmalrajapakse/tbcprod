@@ -4,11 +4,11 @@
     <protected>false</protected>
     <values>
         <field>BatchSize__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:double">1.0</value>
     </values>
     <values>
         <field>HandlerName__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">IntimeExpenseSyncHandler</value>
     </values>
     <values>
         <field>Object__c</field>
@@ -16,7 +16,7 @@
     </values>
     <values>
         <field>Order__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:double">5.0</value>
     </values>
     <values>
         <field>RelationshipName__c</field>
@@ -32,7 +32,7 @@
     </values>
     <values>
         <field>Type__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Salesforce To Intime Expense</value>
     </values>
     <values>
         <field>WebserviceReference__c</field>
