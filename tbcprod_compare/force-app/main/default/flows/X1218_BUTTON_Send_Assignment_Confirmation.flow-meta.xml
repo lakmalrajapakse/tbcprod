@@ -252,7 +252,7 @@
             <targetReference>get_Assignment_WFM_record</targetReference>
         </connector>
     </start>
-    <status>Obsolete</status>
+    <status>Active</status>
     <variables>
         <name>recordId</name>
         <dataType>String</dataType>

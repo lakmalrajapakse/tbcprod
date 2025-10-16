@@ -18,7 +18,7 @@
             <assignToReference>RatesText</assignToReference>
             <operator>Add</operator>
             <value>
-                <stringValue> / </stringValue>
+                <stringValue>&lt;br/&gt;</stringValue>
             </value>
         </assignmentItems>
         <connector>
@@ -26,15 +26,15 @@
         </connector>
     </assignments>
     <assignments>
-        <name>removeFinalSlashFromText</name>
-        <label>removeFinalSlashFromText</label>
+        <name>removeFinalDelimiterFromText</name>
+        <label>removeFinalDelimiterFromText</label>
         <locationX>50</locationX>
         <locationY>1679</locationY>
         <assignmentItems>
             <assignToReference>RatesText</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>ratesTextWithoutFinalSlash</elementReference>
+                <elementReference>ratesTextWithoutDelimiter</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -176,12 +176,12 @@
     <formulas>
         <name>rateLineConsolidation</name>
         <dataType>String</dataType>
-        <expression>IF(ISPICKVAL({!loop_to_build_output_text.sirenum__Day_Type__c},&quot;Anyday&quot;), &quot;&quot;, TEXT({!loop_to_build_output_text.sirenum__Day_Type__c})&amp;&quot; &quot;) &amp; IF(AND({!loop_to_build_output_text.Start_Hour_String__c} = &quot;00:00&quot;,  {!loop_to_build_output_text.End_Hour_String__c} = &quot;00:00&quot; ), &quot;&quot;,  {!loop_to_build_output_text.Start_Hour_String__c} &amp; &quot; - &quot; &amp; {!loop_to_build_output_text.End_Hour_String__c}) &amp; &quot; Standard Rate: £&quot;&amp; text(floor({!loop_to_build_output_text.sirenum__Pay_Rate__c})) &amp;&quot;.&quot;&amp; lpad(text(({!loop_to_build_output_text.sirenum__Pay_Rate__c}-floor({!loop_to_build_output_text.sirenum__Pay_Rate__c}))*100),2,&quot;0&quot;)  &amp; IF(ISBLANK({!loop_to_build_output_text.sirenum__Overtime_Pay_Rate__c}), &quot;&quot;,  &quot; OT (£&quot;&amp;text(floor({!loop_to_build_output_text.sirenum__Overtime_Pay_Rate__c})) &amp;&quot;.&quot;&amp; lpad(text(({!loop_to_build_output_text.sirenum__Overtime_Pay_Rate__c}-floor({!loop_to_build_output_text.sirenum__Overtime_Pay_Rate__c}))*100),2,&quot;0&quot;)&amp;&quot;)&quot;  )&amp; IF(ISBLANK({!loop_to_build_output_text.sirenum__Overtime_2x_Pay_Rate__c}), &quot;&quot;,&quot; DT (£&quot;&amp;text(floor({!loop_to_build_output_text.sirenum__Overtime_2x_Pay_Rate__c})) &amp;&quot;.&quot;&amp; lpad(text(({!loop_to_build_output_text.sirenum__Overtime_2x_Pay_Rate__c}-floor({!loop_to_build_output_text.sirenum__Overtime_2x_Pay_Rate__c}))*100),2,&quot;0&quot;) &amp;&quot;)&quot;  )&amp;BR()</expression>
+        <expression>IF(ISPICKVAL({!loop_to_build_output_text.sirenum__Day_Type__c},&quot;Anyday&quot;), &quot;&quot;, TEXT({!loop_to_build_output_text.sirenum__Day_Type__c})&amp;&quot; &quot;) &amp; IF(AND({!loop_to_build_output_text.Start_Hour_String__c} = &quot;00:00&quot;,  {!loop_to_build_output_text.End_Hour_String__c} = &quot;00:00&quot; ), &quot;&quot;,  {!loop_to_build_output_text.Start_Hour_String__c} &amp; &quot; - &quot; &amp; {!loop_to_build_output_text.End_Hour_String__c}) &amp; &quot; Standard Rate: £&quot;&amp; text(floor({!loop_to_build_output_text.sirenum__Pay_Rate__c})) &amp;&quot;.&quot;&amp; lpad(text(({!loop_to_build_output_text.sirenum__Pay_Rate__c}-floor({!loop_to_build_output_text.sirenum__Pay_Rate__c}))*100),2,&quot;0&quot;)  &amp; IF(ISBLANK({!loop_to_build_output_text.sirenum__Overtime_Pay_Rate__c}), &quot;&quot;,  &quot; OT (£&quot;&amp;text(floor({!loop_to_build_output_text.sirenum__Overtime_Pay_Rate__c})) &amp;&quot;.&quot;&amp; lpad(text(({!loop_to_build_output_text.sirenum__Overtime_Pay_Rate__c}-floor({!loop_to_build_output_text.sirenum__Overtime_Pay_Rate__c}))*100),2,&quot;0&quot;)&amp;&quot;)&quot;  )&amp; IF(ISBLANK({!loop_to_build_output_text.sirenum__Overtime_2x_Pay_Rate__c}), &quot;&quot;,&quot; DT (£&quot;&amp;text(floor({!loop_to_build_output_text.sirenum__Overtime_2x_Pay_Rate__c})) &amp;&quot;.&quot;&amp; lpad(text(({!loop_to_build_output_text.sirenum__Overtime_2x_Pay_Rate__c}-floor({!loop_to_build_output_text.sirenum__Overtime_2x_Pay_Rate__c}))*100),2,&quot;0&quot;) &amp;&quot;)&quot;  )</expression>
     </formulas>
     <formulas>
-        <name>ratesTextWithoutFinalSlash</name>
+        <name>ratesTextWithoutDelimiter</name>
         <dataType>String</dataType>
-        <expression>LEFT({!RatesText},LEN({!RatesText})-2)</expression>
+        <expression>LEFT({!RatesText},LEN({!RatesText})-5)</expression>
     </formulas>
     <interviewLabel>1218 - Assignment on create set default rates from contract and role {!$Flow.CurrentDateTime}</interviewLabel>
     <label>1218 - Assignment on create set default rates from contract and role</label>
@@ -196,7 +196,7 @@
             <targetReference>buildOutputText</targetReference>
         </nextValueConnector>
         <noMoreValuesConnector>
-            <targetReference>removeFinalSlashFromText</targetReference>
+            <targetReference>removeFinalDelimiterFromText</targetReference>
         </noMoreValuesConnector>
     </loops>
     <processMetadataValues>
@@ -346,6 +346,12 @@
             </value>
         </inputAssignments>
         <inputAssignments>
+            <field>Recalculate_Rates__c</field>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
             <field>sirenum__Charge_Rate__c</field>
             <value>
                 <elementReference>chargeRate</elementReference>
@@ -370,6 +376,12 @@
                 <booleanValue>true</booleanValue>
             </value>
         </inputAssignments>
+        <inputAssignments>
+            <field>Recalculate_Rates__c</field>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </inputAssignments>
         <inputReference>$Record</inputReference>
     </recordUpdates>
     <start>
@@ -378,8 +390,9 @@
         <connector>
             <targetReference>Get_Contract</targetReference>
         </connector>
+        <filterFormula>OR(AND({!$Record.Recalculate_Rates__c}, {!$Record.Recalculate_Rates__c} != {!$Record__Prior.Recalculate_Rates__c}), ISNEW())</filterFormula>
         <object>sirenum__Placement__c</object>
-        <recordTriggerType>Create</recordTriggerType>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
     <status>Active</status>

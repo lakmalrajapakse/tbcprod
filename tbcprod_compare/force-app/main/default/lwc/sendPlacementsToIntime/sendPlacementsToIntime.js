@@ -263,7 +263,7 @@ export default class SendPlacementsToIntime extends LightningElement {
     **/
     handleSelectAll (event) {
         this._selectedRecordIds = new Array();
-        this._holidaysList.forEach(item => {
+        this._recordsList.forEach(item => {
             this._selectedRecordIds.push(item.Id);
         });
         this._selectedContactIds = [...this._selectedRecordIds];

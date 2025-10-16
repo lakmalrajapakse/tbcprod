@@ -117,15 +117,8 @@
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
-            <field>Ready_to_Send_Assignment_Details__c</field>
+            <field>Send_Assignment_Details__c</field>
             <operator>EqualTo</operator>
-            <value>
-                <booleanValue>true</booleanValue>
-            </value>
-        </filters>
-        <filters>
-            <field>Date_Assignment_Details_Sent__c</field>
-            <operator>IsNull</operator>
             <value>
                 <booleanValue>true</booleanValue>
             </value>
@@ -141,5 +134,5 @@
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Obsolete</status>
+    <status>Active</status>
 </Flow>
